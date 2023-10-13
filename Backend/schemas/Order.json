@@ -1,0 +1,12 @@
+{
+    "id": "NUMBER",
+    "customerId": "NUMBER",
+    "date": "DATE",
+    "canteenId": "NUMBER",
+    "foodItems": ["foodItemId"],
+    "totalPrice": "NUMBER",
+    "totalItems": "NUMBER",
+    "orderStatus": "STRING(received,confirmed,preparing,prepared,readyToPickup)",
+    "orderedTime": "TIME",
+    "pickupTime": "TIME"
+}

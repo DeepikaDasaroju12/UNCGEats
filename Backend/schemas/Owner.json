@@ -1,0 +1,7 @@
+{
+    "name": "STRING",
+    "phoneNumber": "NUMBER",
+    "emailId": "STRING",
+    "canteenIds": ["NUMBER"],
+    "Id": "NUMBER"
+}

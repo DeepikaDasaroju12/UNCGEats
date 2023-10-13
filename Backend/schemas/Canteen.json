@@ -1,0 +1,13 @@
+{
+    "name": "STRING",
+    "id": "NUMBER",
+    "ownerId": "NUMBER",
+    "address": "STRING",
+    "latitude": "NUMBER",
+    "longitude": "NUMBER",
+    "foodItems": ["foodIds"],
+    "description": "STRING",
+    "workingHours": "STRING",
+    "reviews": ["STRING"],
+    "averageRating": "NUMBER"
+}

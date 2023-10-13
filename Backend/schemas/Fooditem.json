@@ -1,0 +1,11 @@
+{
+    "id": "NUMBER",
+    "name": "STRING",
+    "restaurantId": "NUMBER",
+    "description": "STRING",
+    "price": "NUMBER",
+    "image": "STRING",
+    "reviews": ["STRING"],
+    "averageRating": "NUMBER"
+
+}

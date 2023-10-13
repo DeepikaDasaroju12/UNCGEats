@@ -1,0 +1,6 @@
+DB_NAME = "UNCGEats"
+USER_COLLECTION = "customers"
+CANTEEN_COLLECTION = "canteens"
+FOOD_ITEM_COLLECTION = "food_items"
+ORDER_COLLECTION = "orders"
+OWNER_COLLECTION = "owners"

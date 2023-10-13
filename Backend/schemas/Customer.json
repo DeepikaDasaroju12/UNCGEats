@@ -1,0 +1,6 @@
+{
+    "name": "STRING",
+    "phoneNumber": "NUMBER",
+    "emailId": "STRING",
+    "id": "NUMBER"
+}
