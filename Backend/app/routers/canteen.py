@@ -1,3 +1,4 @@
+from email.mime.text import MIMEText
 from fastapi import APIRouter, Depends, HTTPException
 import json
 from datetime import datetime
@@ -68,3 +69,36 @@ async def get_canteen(Id: int):
         return response
     except Exception as e:
         return {"error": str(e)}
+
+canteen_requests = []
+@router.post("/createCanteenRequests")
+async def create_canteen_request(RequestId: int):
+    RequestId = len(canteen_requests) + 1
+    canteen_requests.append(RequestId)
+    return canteen_requests
+    
+@router.post("/getCanteenRequest")
+async def send_canteen_request(RequestId: int):
+    try:
+        response = COLL.find_one({"RequestId": RequestId})
+        response['_id'] = str(response['_id'])
+        return canteen_requests
+    except Exception as e:
+        return {"error": str(e)}
+    
+@router.put("/getCanteenRequest/approve/{RequestId}")
+async def approve_canteen_request(RequestId: int):
+    for request in canteen_requests:
+        if request == RequestId:
+            request.approved = True
+            return request
+    raise HTTPException(status_code=404, detail="Request not found")
+
+@router.put("/getCanteenRequest/reject/{RequestID}")
+async def reject_canteen_request(RequestID: int):
+    for request in canteen_requests:
+        if request == RequestID:
+            request.approved = False
+            return request
+    raise HTTPException(status_code=404, detail="Request not found")
+

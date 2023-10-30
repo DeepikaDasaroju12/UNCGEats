@@ -7,6 +7,7 @@ import { Owner } from '../models/owner.model';
 import { Canteen } from '../models/canteen.model';
 import { Order } from '../models/order.model';
 import { FoodItem } from '../models/food-item.model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -92,7 +93,20 @@ export class BackendService {
     return this.http.post<any>(new URL( 'canteen/createCanteen', 'http://localhost:8000' ).toString(), food_item);
   }
 
-  
+  sendCanteenRequest(canteenRequest: FormGroup): Observable<boolean> {
+    // Extract the canteen request data from the FormGroup
+    const requestData = canteenRequest.value;
+    const params = new HttpParams({
+      fromObject: requestData
+    })
+
+    // Send an HTTP POST request to send the canteen request
+    return this.http.post<boolean>(
+      new URL( 'canteen/sendCanteenRequest', 'http://localhost:8000' ).toString(),
+      
+      {params}
+    );
+  }
 
   
 }

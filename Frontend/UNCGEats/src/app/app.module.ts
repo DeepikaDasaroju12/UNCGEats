@@ -11,6 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { CanteenComponent } from './canteen/canteen.component';
 import { BackendService } from './services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { OrdersComponent } from './orders/orders.component';
+import { OwnerComponent } from './owner/owner.component';
+// import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    CanteenComponent
+    CanteenComponent,
+    AdminDashboardComponent,
+    OrdersComponent,
+    OwnerComponent,
   ],
   imports: [
     BrowserModule,

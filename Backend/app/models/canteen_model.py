@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import List
 
 class Canteen(BaseModel):
+    RequestId : int | None
     Name : str | None
     Id : int | None
     OwnerId : int | None
