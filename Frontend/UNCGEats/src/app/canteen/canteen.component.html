@@ -1,0 +1,31 @@
+<!-- canteen.component.html -->
+<!-- <div class="canteen-list">
+  <h2>Select canteen</h2>
+  <ul>
+    <li *ngFor="let canteen of canteens">
+      <button (click)="showCanteenDetails(canteen)">{{ canteen.name }}</button>
+    </li>
+  </ul>
+  <div class="canteen-details" *ngIf="selectedCanteen">
+    <h3>{{ selectedCanteen.name }}</h3>
+    <p><strong>Location:</strong> {{ selectedCanteen.location }}</p>
+    <p><strong>Timings:</strong> {{ selectedCanteen.timings }}</p>
+    <p><strong>Working Hours:</strong> {{ selectedCanteen.workingHours }}</p>
+  </div>
+</div> -->
+<!-- canteen.component.html -->
+<div class="canteen-list">
+    <h2>Select canteen</h2>
+    <ul>
+      <li *ngFor="let canteen of canteens">
+        <!-- <h3>{{ canteen.name }}</h3> -->
+        <a [routerLink]="['/food-items-list', canteen.name]">{{ canteen.name }}</a>
+  
+        <p><strong>Location:</strong> {{ canteen.location }}</p>
+        <p><strong>Timings:</strong> {{ canteen.timings }}</p>
+        <p><strong>Working Hours:</strong> {{ canteen.workingHours }}</p>
+        
+      </li>
+    </ul>
+  </div>
+  

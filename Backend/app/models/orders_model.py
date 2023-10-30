@@ -11,14 +11,14 @@ class OrderStatusEnum(str, Enum):
     ready_to_pickup = 'readyToPickup'
 
 class Order(BaseModel):
-    id : int | None
-    customer_id : int | None
-    order_date : datetime | None
-    canteen_id : int | None
-    food_items : List[int] | None
-    total_price : int | None
-    total_items : int | None
-    order_status : OrderStatusEnum | None
-    ordered_time : datetime | None
-    pickup_time : datetime | None
-    last_updated: datetime | None = None
+    Id : int | None
+    CustomerId : int | None
+    OrderDate : datetime | None
+    CanteenId : int | None
+    FoodItems : List[int] | None
+    TotalPrice : int | None
+    TotalItems : int | None
+    OrderStatus : OrderStatusEnum | None
+    OrderedTime : datetime | None
+    PickupTime : datetime | None
+    LastUpdated: datetime | None = None

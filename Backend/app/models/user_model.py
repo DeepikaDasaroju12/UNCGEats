@@ -3,11 +3,12 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
-    name: str | None
-    phone_number: int | None
-    email_id: str | None
-    id: int | None = None
-    created_time: datetime | None = None
-    last_updated: datetime | None = None
-    last_logged: datetime | None = None
+    Name: str | None
+    Password : str | None
+    PhoneNumber: int | None
+    Email: str | None
+    Id: int | None = None
+    CreatedTime: datetime | None = None
+    LastUpdated: datetime | None = None
+    LastLogged: datetime | None = None
     

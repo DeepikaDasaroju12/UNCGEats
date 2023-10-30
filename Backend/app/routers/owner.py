@@ -21,13 +21,13 @@ COLL = DB.get_collection(OWNER_COLLECTION)
 async def create_owner(owner : Owner):
     try:
         last_id = 0
-        last_document_list = list(COLL.find().sort('id', -1).limit(1))
+        last_document_list = list(COLL.find().sort('Id', -1).limit(1))
         if (last_document_list):
-            last_id = last_document_list[0]["id"]
-        owner.id = last_id + 1
-        owner.created_time = datetime.now().isoformat()
-        owner.last_updated = None
-        owner.last_logged = None
+            last_id = last_document_list[0]["Id"]
+        owner.Id = last_id + 1
+        owner.CreatedTime = datetime.now().isoformat()
+        owner.LastUpdated = None
+        owner.LastLogged = None
         response = COLL.insert_one(json.loads(owner.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):
@@ -38,10 +38,10 @@ async def create_owner(owner : Owner):
         return {"success": False, "error": str(e)}
 
 @router.put("/updateOwner")
-async def update_owner(id: int, changes: dict):
+async def update_owner(Id: int, changes: dict):
     try:
-        filter = {"id": id}
-        changes["last_updated"] = datetime.now().isoformat()
+        filter = {"Id": Id}
+        changes["LastUpdated"] = datetime.now().isoformat()
         new_values = {"$set": changes}
         response = COLL.update_one(filter, new_values)
         output = {"success": False}
@@ -53,17 +53,17 @@ async def update_owner(id: int, changes: dict):
         return {"success": False, "error": str(e)}
 
 @router.delete("/deleteOwner")
-async def delete_owner(id: int):
+async def delete_owner(Id: int):
     try:
-        response = COLL.delete_one({"id": id})
+        response = COLL.delete_one({"Id": Id})
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 @router.get("/getOwner")
-async def get_owner(id: int):
+async def get_owner(Id: int):
     try:
-        response = COLL.find_one({"id": id})
+        response = COLL.find_one({"Id": Id})
         response['_id'] = str(response['_id'])
         return response
     except Exception as e:

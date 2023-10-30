@@ -21,12 +21,12 @@ COLL = DB.get_collection(ORDER_COLLECTION)
 async def create_order(order : Order):
     try:
         last_id = 0
-        last_document_list = list(COLL.find().sort('id', -1).limit(1))
+        last_document_list = list(COLL.find().sort('Id', -1).limit(1))
         if (last_document_list):
-            last_id = last_document_list[0]["id"]
-        order.id = last_id + 1
-        order.ordered_time = datetime.now().isoformat()
-        order.pickup_time = datetime.now().isoformat()
+            last_id = last_document_list[0]["Id"]
+        order.Id = last_id + 1
+        order.OrderedTime = datetime.now().isoformat()
+        order.PickupTime = datetime.now().isoformat()
         response = COLL.insert_one(json.loads(order.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):
@@ -37,10 +37,10 @@ async def create_order(order : Order):
         return {"success": False, "error": str(e)}
 
 @router.put("/updateOrder")
-async def update_order(id: int, changes: dict):
+async def update_order(Id: int, changes: dict):
     try:
-        filter = {"id": id}
-        changes["last_updated"] = datetime.now().isoformat()
+        filter = {"Id": Id}
+        changes["LastUpdated"] = datetime.now().isoformat()
         new_values = {"$set": changes}
         response = COLL.update_one(filter, new_values)
         output = {"success": False}
@@ -52,17 +52,17 @@ async def update_order(id: int, changes: dict):
         return {"success": False, "error": str(e)}
 
 @router.delete("/deleteOrder")
-async def delete_order(id: int):
+async def delete_order(Id: int):
     try:
-        response = COLL.delete_one({"id": id})
+        response = COLL.delete_one({"Id": Id})
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 @router.get("/getOrder")
-async def get_order(id: int):
+async def get_order(Id: int):
     try:
-        response = COLL.find_one({"id": id})
+        response = COLL.find_one({"Id": Id})
         response['_id'] = str(response['_id'])
         return response
     except Exception as e:

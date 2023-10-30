@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control" formControlName="Name" placeholder="">
+        <label for="name">Name</label>
+        <div *ngIf="loginForm.controls['Name'].invalid && (loginForm.controls['Name'].dirty || loginForm.controls['Name'].touched)" class="alert">
+          <div *ngIf="loginForm.controls['Name'].hasError('required')">
+          Username is required.
+        </div>
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control" formControlName="Password" placeholder="">
+        <label for="Password">Password</label>
+        <div *ngIf="loginForm.controls['Password'].invalid && (loginForm.controls['Password'].dirty || loginForm.controls['Password'].touched)" class="alert">
+          <div *ngIf="loginForm.controls['Password'].hasError('required')">
+          Password is required.
+        </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Sign Up As</label>
+        <select class="form-select form-select-lg" formControlName="type">
+          <option selected>Select one</option>
+          <option value="User">User</option>
+          <option value="Owner">Owner</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Login</button>
+
+    </form>
+    
+    <div *ngIf="loginFailed" class="error-message" style="color: red;">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  

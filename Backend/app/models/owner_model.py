@@ -4,11 +4,11 @@ from typing import List
 
 
 class Owner(BaseModel):
-    name: str | None
-    phoneNumber: int | None
-    email_id: str | None
-    canteen_Ids : List[int] | None
-    id: int | None
-    created_time: datetime | None = None
-    last_updated: datetime | None = None
-    last_logged: datetime | None = None
+    Name: str | None
+    PhoneNumber: int | None
+    Email: str | None
+    CanteenId : List[int] | None
+    Id: int | None
+    CreatedTime: datetime | None = None
+    LastUpdated: datetime | None = None
+    LastLogged: datetime | None = None

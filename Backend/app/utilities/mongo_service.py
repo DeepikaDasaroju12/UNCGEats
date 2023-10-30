@@ -4,7 +4,7 @@ Module to manage Mongo Connection
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = "mongodb+srv://mongoadmin:mongoadmin@uncgeats.wtd3jpg.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb://admin:mongodb@localhost:27017/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
