@@ -3,9 +3,9 @@ import json
 from datetime import datetime
 
 # from ..dependencies import get_token_header
-from app.utilities.mongo_service import client
-from app.utilities.constants import DB_NAME, OWNER_COLLECTION
-from app.models.owner_model import Owner
+from utilities.mongo_service import client
+from utilities.constants import DB_NAME, OWNER_COLLECTION
+from models.owner_model import Owner
 
 router = APIRouter(
     prefix="/owner",

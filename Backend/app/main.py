@@ -2,8 +2,9 @@ from typing import Union
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
-from app.routers import user, canteen, food_item, orders, owner
+from routers import user, canteen, food_item, orders, owner
 
 app = FastAPI()
 
@@ -36,3 +37,7 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.get("/whoisthis")
 def returnUserName():
     return "This is Karthik"
+
+
+if __name__ == "__main__":
+    uvicorn.run(app=app, host='0.0.0.0', port=8000, )

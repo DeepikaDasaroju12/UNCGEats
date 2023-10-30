@@ -4,9 +4,9 @@ import json
 from datetime import datetime
 
 # from ..dependencies import get_token_header
-from app.utilities.mongo_service import client
-from app.utilities.constants import DB_NAME, CANTEEN_COLLECTION
-from app.models.canteen_model import Canteen
+from utilities.mongo_service import client
+from utilities.constants import DB_NAME, CANTEEN_COLLECTION
+from models.canteen_model import Canteen
 
 router = APIRouter(
     prefix="/canteen",
