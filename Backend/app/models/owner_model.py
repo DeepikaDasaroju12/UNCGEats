@@ -1,14 +1,16 @@
-from pydantic import BaseModel
 from datetime import datetime
-from typing import List
+from pydantic import BaseModel, EmailStr, constr
+from typing import Optional
 
 
 class Owner(BaseModel):
-    Name: str | None
-    PhoneNumber: int | None
-    Email: str | None
-    CanteenId : List[int] | None
-    Id: int | None
-    CreatedTime: datetime | None = None
-    LastUpdated: datetime | None = None
-    LastLogged: datetime | None = None
+    FirstName: str
+    LastName: str
+    MiddleName: str
+    PhoneNumber: constr(regex=r'^\(\d{3}\)-\d{3}-\d{4}$')
+    Email: EmailStr
+    Id: int
+    Created: Optional[datetime] = None
+    LastUpdated: Optional[datetime] = None
+    LastLogged: Optional[datetime] = None
+    Password: str

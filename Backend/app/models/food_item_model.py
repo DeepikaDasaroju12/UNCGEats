@@ -1,6 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from enum import Enum
 
 
@@ -10,18 +10,38 @@ class FoodType(str, Enum):
     nv = 'non-vegetarian'
 
 class Food_Item(BaseModel):
-    Id : int | None
-    Name : str | None
-    RestaurantId : int | None
-    Description : str | None
-    Price : int | None
-    Image : str | None
-    Reviews : List[str] | None
-    AverageRating : int | None
+    Id : int 
+    Name : str 
+    Description : Optional[str] = None
+    Price : float 
+    Image : str 
+    AverageRating : Optional[float] = None
     FoodType: FoodType
-    Ingredients: List[str] | None
-    Calories: int | None
-    CreatedTime: datetime | None = None
-    LastUpdated: datetime | None = None
-    LastLogged: datetime | None = None
+    Ingredients: Optional[List[str]] = None
+    Calories: Optional[int] = None
+    CreatedTime: Optional[datetime] = None
+    LastUpdated: Optional[datetime] = None
+    LastLogged: Optional[datetime] = None
 
+
+class Menu(BaseModel):
+    Id: int
+    CanteenId: int
+    Items: List[int]
+    
+
+
+class FoodReviews(BaseModel):
+    Id: int
+    UserId: int
+    ItemId: int
+    Rating: float
+    Comments: Optional[str]
+
+
+class CanteenReviews(BaseModel):
+    Id: int
+    UserId: int
+    CanteenId: int
+    Rating: float
+    Comments: Optional[str]

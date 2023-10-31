@@ -1,14 +1,18 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, constr
+from typing import Optional
 
 
 class User(BaseModel):
-    Name: str | None
-    Password : str | None
-    PhoneNumber: int | None
-    Email: str | None
-    Id: int | None = None
-    CreatedTime: datetime | None = None
-    LastUpdated: datetime | None = None
-    LastLogged: datetime | None = None
+    FirstName: str
+    LastName: str
+    MiddleName: str
+    PhoneNumber: constr(regex=r'^\(\d{3}\)-\d{3}-\d{4}$')
+    Email: EmailStr
+    Id: int
+    Created: Optional[datetime] = None
+    LastUpdated: Optional[datetime] = None
+    LastLogged: Optional[datetime] = None
+    Password: str
+    
     

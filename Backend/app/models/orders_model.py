@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 from enum import Enum
-from typing import List
+from typing import List, Optional
 
 class OrderStatusEnum(str, Enum):
     received = 'received'
@@ -9,16 +9,16 @@ class OrderStatusEnum(str, Enum):
     preparing = 'preparing'
     prepared = 'prepared'
     ready_to_pickup = 'readyToPickup'
+    canceled = 'canceled'
 
 class Order(BaseModel):
-    Id : int | None
-    CustomerId : int | None
-    OrderDate : datetime | None
-    CanteenId : int | None
-    FoodItems : List[int] | None
-    TotalPrice : int | None
-    TotalItems : int | None
-    OrderStatus : OrderStatusEnum | None
-    OrderedTime : datetime | None
-    PickupTime : datetime | None
-    LastUpdated: datetime | None = None
+    Id : int
+    CustomerId : int
+    OrderDate : datetime
+    CanteenId : int
+    FoodItems : List[int]
+    TotalPrice : int
+    TotalItems : int
+    OrderStatus : OrderStatusEnum
+    OrderedTime : datetime
+    PickupTime : Optional[datetime] = None
