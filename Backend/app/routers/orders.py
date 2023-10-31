@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 
 # from ..dependencies import get_token_header
 from utilities.mongo_service import client
@@ -26,7 +27,10 @@ async def create_order(order : Order):
             last_id = last_document_list[0]["Id"]
         order.Id = last_id + 1
         order.OrderedTime = datetime.now().isoformat()
-        order.PickupTime = datetime.now().isoformat()
+        # Adding random mins between 15 to 30 to get pickup time
+        randomMinutes = random.randint(15, 30)
+        pickupTime = datetime.now() + timedelta(minutes=randomMinutes)
+        order.PickupTime = pickupTime.isoformat()
         response = COLL.insert_one(json.loads(order.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):

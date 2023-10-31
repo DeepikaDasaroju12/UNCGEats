@@ -25,7 +25,7 @@ async def create_owner(owner : Owner):
         if (last_document_list):
             last_id = last_document_list[0]["Id"]
         owner.Id = last_id + 1
-        owner.CreatedTime = datetime.now().isoformat()
+        owner.Created = datetime.now().isoformat()
         owner.LastUpdated = None
         owner.LastLogged = None
         response = COLL.insert_one(json.loads(owner.model_dump_json()))

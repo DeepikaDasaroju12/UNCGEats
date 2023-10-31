@@ -28,7 +28,6 @@ async def create_canteen(canteen : Canteen):
         canteen.Id = last_id + 1
         canteen.CreatedTime = datetime.now().isoformat()
         canteen.LastUpdated = None
-        canteen.LastLogged = None 
         response = COLL.insert_one(json.loads(canteen.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):

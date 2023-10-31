@@ -4,3 +4,8 @@ CANTEEN_COLLECTION = "canteens"
 FOOD_ITEM_COLLECTION = "food_items"
 ORDER_COLLECTION = "orders"
 OWNER_COLLECTION = "owners"
+MENU_COLLECTION = "menu"
+CANTEEN_REGISTRATIONS_COLLECTION = "canteen_registrations"
+FOOD_REVIEWS = "food_reviews"
+CANTEEN_REVIEWS = "canteen_reviews"
+

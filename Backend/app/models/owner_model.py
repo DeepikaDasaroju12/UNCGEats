@@ -7,7 +7,7 @@ class Owner(BaseModel):
     FirstName: str
     LastName: str
     MiddleName: str
-    PhoneNumber: constr(regex=r'^\(\d{3}\)-\d{3}-\d{4}$')
+    PhoneNumber: constr(pattern=r'^\(\d{3}\)-\d{3}-\d{4}$')
     Email: EmailStr
     Id: int
     Created: Optional[datetime] = None

@@ -27,7 +27,6 @@ async def create_fooditem(food_item : Food_Item):
         food_item.Id = last_id + 1
         food_item.CreatedTime = datetime.now().isoformat()
         food_item.LastUpdated = None
-        food_item.LastLogged = None
         response = COLL.insert_one(json.loads(food_item.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):

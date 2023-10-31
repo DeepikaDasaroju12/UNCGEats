@@ -4,18 +4,22 @@ from datetime import datetime
 
 # from ..dependencies import get_token_header
 from utilities.mongo_service import client
-from utilities.constants import DB_NAME, USER_COLLECTION
+from utilities.constants import (
+    DB_NAME, 
+    CANTEEN_REGISTRATIONS_COLLECTION, 
+    CANTEEN_COLLECTION
+)
 from models.user_model import User
 
 router = APIRouter(
-    prefix="/user",
-    tags=["User"],
+    prefix="/admin",
+    tags=["Admin"],
     # dependencies=[Depends(get_token_header)],
     # responses={404: {"description": "Not found"}},
 )
 
 DB = client.get_database(DB_NAME)
-COLL = DB.get_collection(USER_COLLECTION)
+COLL = DB.get_collection(CANTEEN_REGISTRATIONS_COLLECTION)
 
 @router.post("/createUser/")
 async def create_user(user: User):
