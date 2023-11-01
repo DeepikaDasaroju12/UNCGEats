@@ -1,61 +1,60 @@
 /* Apply styles to the background image and positioning */
 .background-image {
-    background-image: url('../canteen_bg.jpeg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-  }
-  
-  /* Style the top navigation for login and signup links */
-  .top-nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px;
-  }
-  
-  .top-nav a {
-    margin-left: 10px;
-    color: blue;
-    text-decoration: none;
-  }
-  
-  /* Style the content section */
-  .content {
-    text-align: center;
-    padding: 20px;
-    margin-top: 30%;
-  }
-  
-  .content h1 {
-    font-size: 3em;
-    color: yellowgreen;
-  }
-  
-  .content p {
-    color: blue;
-  }
-  
-  .content a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  /* Style the bottom navigation for contact and about us links */
-  .bottom-nav {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-  }
-  
-  .bottom-nav a {
-    color: red;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 10px;
-  }
-  
+  background-image: url('../canteen_bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+/* Style the top navigation for login and signup links */
+.top-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.top-nav a {
+  margin-left: 10px;
+  color: blue;
+  text-decoration: none;
+}
+
+/* Style the content section */
+.content {
+  text-align: center;
+  padding: 20px;
+  margin-top: 30%;
+}
+
+.content h1 {
+  font-size: 3em;
+  color: yellowgreen;
+}
+
+.content p {
+  color: blue;
+}
+
+.content a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+/* Style the bottom navigation for contact and about us links */
+.bottom-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.bottom-nav a {
+  color: red;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}

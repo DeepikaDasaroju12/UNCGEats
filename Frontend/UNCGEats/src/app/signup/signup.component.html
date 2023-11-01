@@ -1,76 +1,69 @@
-<!-- signup.component.html -->
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
+              <form>
 
-<div class="container">
-  <h2>User Signup</h2>
-  <form [formGroup]="signupForm" (ngSubmit)="signup()">
-    <div class="form-floating mb-3">
-      <input
-        type="text"
-        class="form-control" formControlName="Name" placeholder="">
-      <label for="name">Name</label>
-      <div *ngIf="signupForm.controls['Name'].invalid && (signupForm.controls['Name'].dirty || signupForm.controls['Name'].touched)" class="alert">
-        <div *ngIf="signupForm.controls['Name'].hasError('required')">
-        Username is required.
-      </div>
-      </div>
-    </div>
-    
-    <div class="form-floating mb-3">
-      <input
-        type="text"
-        class="form-control" formControlName="Email" placeholder="">
-      <label for="Email">Email</label>
-      <div *ngIf="signupForm.controls['Email'].invalid && (signupForm.controls['Email'].dirty || signupForm.controls['Email'].touched)" class="alert">
-        <div *ngIf="signupForm.controls['Email'].hasError('required')">
-        Email is required.
-      </div>
-      </div>
-      
-    </div>
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">First Name</label>
+                </div>
 
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Last Name</label>
+                </div>
 
-    <div class="form-floating mb-3">
-      <input
-        type="password"
-        class="form-control" formControlName="Password" placeholder="">
-      <label for="Password">Password</label>
-      <div *ngIf="signupForm.controls['Password'].invalid && (signupForm.controls['Password'].dirty || signupForm.controls['Password'].touched)" class="alert">
-        <div *ngIf="signupForm.controls['Password'].hasError('required')">
-        Password is required.
-        </div>
-        <div *ngIf="signupForm.controls['Password'].hasError('minLength')">
-          Password must be at least 8 characters long.
-        </div>
-        <div *ngIf="signupForm.controls['Password'].hasError('pattern')" >
-          Password must contain at least one lowercase letter, one uppercase letter, and one special character.
-        </div>
-      </div>
-    </div>
-    <div class="form-floating mb-3">
-      <input
-        type="tel"
-        class="form-control" formControlName="PhoneNumber" placeholder="">
-      <label for="PhoneNumber">Phone Number</label>
-    </div>
+                <div class="form-outline mb-4">
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example3cg">Email</label>
+                </div>
 
-    <div class="mb-3">
-      <label for="" class="form-label">Sign Up As</label>
-      <select class="form-select form-select-lg" formControlName="type">
-        <option selected>Select one</option>
-        <option value="User">User</option>
-        <option value="Owner">Owner</option>
-      </select>
-    </div>
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                </div>
 
-    <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary">Signup</button>
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                </div>
 
-  </form>
-  <div *ngIf="signupSuccess" class="success-message">
-    Signup successful! You can now log in.
+<div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+  <h6 class="mb-0 me-4">User Type: </h6>
+
+  <div class="form-check form-check-inline mb-0 me-4">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="owner" value="owner" />
+    <label class="form-check-label" for="owner">Owner</label>
   </div>
-  <div *ngIf="emailExists" class="error-message" style="color: red;">
-    {{signupError}}
+
+  <div class="form-check form-check-inline mb-0 me-4">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="customer" value="customer" />
+    <label class="form-check-label" for="customer">Customer</label>
   </div>
-  
 </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="button"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a routerLink="/"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

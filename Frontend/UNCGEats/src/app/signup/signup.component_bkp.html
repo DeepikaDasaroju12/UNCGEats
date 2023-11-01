@@ -1,0 +1,76 @@
+<!-- signup.component.html -->
+
+
+<div class="container">
+  <h2>User Signup</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control" formControlName="Name" placeholder="">
+      <label for="name">Name</label>
+      <div *ngIf="signupForm.controls['Name'].invalid && (signupForm.controls['Name'].dirty || signupForm.controls['Name'].touched)" class="alert">
+        <div *ngIf="signupForm.controls['Name'].hasError('required')">
+        Username is required.
+      </div>
+      </div>
+    </div>
+    
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control" formControlName="Email" placeholder="">
+      <label for="Email">Email</label>
+      <div *ngIf="signupForm.controls['Email'].invalid && (signupForm.controls['Email'].dirty || signupForm.controls['Email'].touched)" class="alert">
+        <div *ngIf="signupForm.controls['Email'].hasError('required')">
+        Email is required.
+      </div>
+      </div>
+      
+    </div>
+
+
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control" formControlName="Password" placeholder="">
+      <label for="Password">Password</label>
+      <div *ngIf="signupForm.controls['Password'].invalid && (signupForm.controls['Password'].dirty || signupForm.controls['Password'].touched)" class="alert">
+        <div *ngIf="signupForm.controls['Password'].hasError('required')">
+        Password is required.
+        </div>
+        <div *ngIf="signupForm.controls['Password'].hasError('minLength')">
+          Password must be at least 8 characters long.
+        </div>
+        <div *ngIf="signupForm.controls['Password'].hasError('pattern')" >
+          Password must contain at least one lowercase letter, one uppercase letter, and one special character.
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="tel"
+        class="form-control" formControlName="PhoneNumber" placeholder="">
+      <label for="PhoneNumber">Phone Number</label>
+    </div>
+
+    <div class="mb-3">
+      <label for="" class="form-label">Sign Up As</label>
+      <select class="form-select form-select-lg" formControlName="type">
+        <option selected>Select one</option>
+        <option value="User">User</option>
+        <option value="Owner">Owner</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary">Signup</button>
+
+  </form>
+  <div *ngIf="signupSuccess" class="success-message">
+    Signup successful! You can now log in.
+  </div>
+  <div *ngIf="emailExists" class="error-message" style="color: red;">
+    {{signupError}}
+  </div>
+  
+</div>
