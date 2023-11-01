@@ -30,10 +30,8 @@ export class OwnerComponent implements OnInit {
     Address: '',
     Latitude: 0,
     Longitude: 0,
-    FoodItems: [],
     Description: '',
     WorkingHours: 0,
-    Reviews: [],
     AverageRating: 0,
   };
 
@@ -44,13 +42,11 @@ export class OwnerComponent implements OnInit {
     Latitude: 0,
     Longitude: 0,
     Description: '',
-    FoodItems: [],
     WorkingHours: 0,
-    Reviews: [],
     AverageRating: 0
   };
   canteenAdded: boolean = false;
-  canteenRequestSent: boolean = false;  
+  canteenRequestSent: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,9 +75,9 @@ export class OwnerComponent implements OnInit {
   addCanteen(): void {
     // Create a new Canteen object with the provided properties
     this.canteenAdded = true;
-  
+
     console.log(JSON.stringify(this.canteen));
-  
+
     // Call the createCanteen method with the new Canteen object
     this.backendService.createCanteen(this.canteen).subscribe(
       (response: boolean) => {

@@ -8,6 +8,7 @@ import {FoodItemsListComponent} from './food-items-list/food-items-list.componen
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OwnerComponent } from './owner/owner.component';
+import { UserCanteenListViewComponent } from './user-canteen-list-view/user-canteen-list-view.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   // { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'food-items-list/:canteenName', component: FoodItemsListComponent },
+  {path: 'canteens', component: UserCanteenListViewComponent}
 ];
 
 @NgModule({

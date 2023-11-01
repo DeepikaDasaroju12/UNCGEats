@@ -3,14 +3,13 @@ export interface Canteen{
     Id?: number
     OwnerId: number
     Address : string
-    Latitude : number
-    Longitude : number
-    FoodItems : number[]
-    Description : string 
+    Latitude? : number
+    Longitude? : number
+    Description? : string
     WorkingHours : number
-    Reviews : string[]
     AverageRating: number
     CreatedTime?: Date
     LastUpdated?: Date
-    LastLogged ?: Date
+    Image?: string
+    _id?: string
 }

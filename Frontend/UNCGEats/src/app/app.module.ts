@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OwnerComponent } from './owner/owner.component';
+import { UserCanteenListViewComponent } from './user-canteen-list-view/user-canteen-list-view.component';
 // import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { OwnerComponent } from './owner/owner.component';
     AdminDashboardComponent,
     OrdersComponent,
     OwnerComponent,
+    UserCanteenListViewComponent,
   ],
   imports: [
     BrowserModule,

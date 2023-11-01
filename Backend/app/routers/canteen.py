@@ -16,19 +16,19 @@ router = APIRouter(
 )
 
 DB = client.get_database(DB_NAME)
-COLL = DB.get_collection(CANTEEN_COLLECTION)
+CANTEEN_COLL = DB.get_collection(CANTEEN_COLLECTION)
 
 @router.post("/createCanteen/")
 async def create_canteen(canteen : Canteen):
     try:
         last_id = 0
-        last_document_list = list(COLL.find().sort('Id', -1).limit(1))
+        last_document_list = list(CANTEEN_COLL.find().sort('Id', -1).limit(1))
         if (last_document_list):
             last_id = last_document_list[0]["Id"]
         canteen.Id = last_id + 1
         canteen.CreatedTime = datetime.now().isoformat()
         canteen.LastUpdated = None
-        response = COLL.insert_one(json.loads(canteen.model_dump_json()))
+        response = CANTEEN_COLL.insert_one(json.loads(canteen.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):
             output["success"] = True
@@ -43,7 +43,7 @@ async def update_canteen(Id: int, changes: dict):
         filter = {"Id": Id}
         changes["LastUpdated"] = datetime.now().isoformat()
         new_values = {"$set": changes}
-        response = COLL.update_one(filter, new_values)
+        response = CANTEEN_COLL.update_one(filter, new_values)
         output = {"success": False}
         if (response.modified_count):
             output["success"] = True
@@ -55,7 +55,7 @@ async def update_canteen(Id: int, changes: dict):
 @router.delete("/deleteCanteen")
 async def delete_canteen(Id: int):
     try:
-        response = COLL.delete_one({"Id": Id})
+        response = CANTEEN_COLL.delete_one({"Id": Id})
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
@@ -63,9 +63,20 @@ async def delete_canteen(Id: int):
 @router.get("/getCanteen")
 async def get_canteen(Id: int):
     try:
-        response = COLL.find_one({"Id": Id})
+        response = CANTEEN_COLL.find_one({"Id": Id})
         response['_id'] = str(response['_id'])
         return response
+    except Exception as e:
+        return {"error": str(e)}
+    
+@router.get("/getAllCanteens")
+async def get_all_canteens():
+    data = []
+    try:
+        for canteen in CANTEEN_COLL.find({}):
+            canteen['_id'] = str(canteen['_id'])
+            data.append(canteen)
+        return data
     except Exception as e:
         return {"error": str(e)}
 
@@ -79,7 +90,7 @@ async def create_canteen_request(RequestId: int):
 @router.post("/getCanteenRequest")
 async def send_canteen_request(RequestId: int):
     try:
-        response = COLL.find_one({"RequestId": RequestId})
+        response = CANTEEN_COLL.find_one({"RequestId": RequestId})
         response['_id'] = str(response['_id'])
         return canteen_requests
     except Exception as e:
