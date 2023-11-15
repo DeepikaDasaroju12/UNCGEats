@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { UserLandingPageComponent } from './user-landing-page.component';
+
+describe('UserLandingPageComponent', () => {
+  let component: UserLandingPageComponent;
+  let fixture: ComponentFixture<UserLandingPageComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [UserLandingPageComponent]
+    });
+    fixture = TestBed.createComponent(UserLandingPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

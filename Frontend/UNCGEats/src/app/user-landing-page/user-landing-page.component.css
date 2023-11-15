@@ -1,0 +1,24 @@
+    .sidebar {
+      background-color: #f8f9fa;
+      height: 100vh;
+    }
+
+    .main-content {
+      padding: 20px;
+    }
+
+    .list-group {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+    }
+
+    .small-row {
+      height: 100px;
+      background-color: #e9ecef;
+      margin-bottom: 20px;
+    }
+
+        .big-container {
+          height: 500px;
+          background-color: #e9ecef;
+        }

@@ -26,7 +26,7 @@ export class BackendService {
   apiUrl = new AppSettings().backendUrl;
 
   createUser(user: User): Observable<any> {
-    user.CreatedTime = undefined;
+    user.Created = undefined;
     user.LastLogged = undefined;
     user.LastUpdated = undefined;
     user.Id = -1;
@@ -47,11 +47,12 @@ export class BackendService {
     );
   }
 
-  isUserValid(Name: string, Password: string): Observable<boolean> {
+  isUserValid(Email: string, Password: string, UserType: string): Observable<boolean> {
     // Create a request body with the user's credentials
     const requestBody = {
-      Name: Name,
+      Email: Email,
       Password: Password,
+      UserType: UserType
     };
 
     const params = new HttpParams({

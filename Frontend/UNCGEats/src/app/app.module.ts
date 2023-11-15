@@ -15,6 +15,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { OrdersComponent } from './orders/orders.component';
 import { OwnerComponent } from './owner/owner.component';
 import { UserCanteenListViewComponent } from './user-canteen-list-view/user-canteen-list-view.component';
+import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 // import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { UserCanteenListViewComponent } from './user-canteen-list-view/user-cant
     OrdersComponent,
     OwnerComponent,
     UserCanteenListViewComponent,
+    UserLandingPageComponent,
   ],
   imports: [
     BrowserModule,

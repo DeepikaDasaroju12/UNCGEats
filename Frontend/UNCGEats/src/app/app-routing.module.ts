@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { OrdersComponent } from './orders/orders.component';
 import { OwnerComponent } from './owner/owner.component';
 import { UserCanteenListViewComponent } from './user-canteen-list-view/user-canteen-list-view.component';
+import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   // { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'food-items-list/:canteenName', component: FoodItemsListComponent },
-  {path: 'canteens', component: UserCanteenListViewComponent}
+  {path: 'canteens', component: UserCanteenListViewComponent},
+  {path: 'userlanding', component: UserLandingPageComponent}
 ];
 
 @NgModule({

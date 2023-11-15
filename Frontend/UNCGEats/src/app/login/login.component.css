@@ -7,17 +7,17 @@
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .login-container h2 {
     margin-bottom: 20px;
     text-align: center;
   }
-  
+
   .login-container label {
     display: block;
     margin-bottom: 5px;
   }
-  
+
   .login-container input {
     width: 100%;
     padding: 10px;
@@ -25,7 +25,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  
+
   .login-container button {
     width: 100%;
     padding: 10px;
@@ -36,10 +36,9 @@
     font-size: 16px;
     cursor: pointer;
   }
-  
+
   .login-container button:hover {
     background-color: #0056b3;
   }
 
-  
-  
+

@@ -1,60 +1,53 @@
-/* Apply styles to the background image and positioning */
 .background-image {
-  background-image: url('../canteen_bg.jpeg');
+background-image: url('../../assets/SpartanDining0.png');
   background-size: cover;
-  background-position: center;
   height: 100vh;
-}
-
-/* Style the top navigation for login and signup links */
-.top-nav {
   display: flex;
-  justify-content: flex-end;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-.top-nav a {
-  margin-left: 10px;
-  color: blue;
-  text-decoration: none;
-}
-
-/* Style the content section */
-.content {
+.text-center {
+  color: #fff;
   text-align: center;
-  padding: 20px;
-  margin-top: 30%;
 }
 
-.content h1 {
-  font-size: 3em;
-  color: yellowgreen;
+.custom-h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
 }
 
-.content p {
-  color: blue;
+.custom-p {
+  font-size: 1.5rem;
 }
 
-.content a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #3498db;
+.custom-btn-primary {
+  background-color: #4caf50;
+  /* Green */
+  border: 2px solid #4CAF50;
   color: white;
+  padding: 10px 20px;
+  text-align: center;
   text-decoration: none;
-  border-radius: 5px;
-  margin-top: 20px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 
-/* Style the bottom navigation for contact and about us links */
-.bottom-nav {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-}
-
-.bottom-nav a {
-  color: red;
+.custom-btn-outline-light {
+  background-color: #f8f9fa;
+  /* Light Grey */
+  border: 2px solid #f8f9fa;
+  color: #212529;
+  /* Dark Grey */
+  padding: 10px 20px;
+  text-align: center;
   text-decoration: none;
-  display: block;
-  margin-bottom: 10px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }

@@ -1,8 +1,8 @@
 <div class="row row-cols-3 g-3">
       <div class="col" *ngFor="let canteen of this.canteenList">
-        <div class="card">
+        <div class="card" style="cursor: pointer;" routerLink="/">
           <img src={{canteen.Image}} class="card-img-top"
-            alt="Hollywood Sign on The Hill" />
+            style="height: 10vw; object-fit: cover" />
           <div class="card-body">
             <h5 class="card-title">{{canteen.Name}}</h5>
             <p class="card-text">

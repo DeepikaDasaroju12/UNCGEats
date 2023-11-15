@@ -5,7 +5,7 @@ from datetime import datetime
 # from ..dependencies import get_token_header
 from utilities.mongo_service import client
 from utilities.constants import DB_NAME, USER_COLLECTION
-from models.user_model import User
+from models.user_model import User, UserTypeEnum
 
 router = APIRouter(
     prefix="/user",
@@ -16,6 +16,7 @@ router = APIRouter(
 
 DB = client.get_database(DB_NAME)
 COLL = DB.get_collection(USER_COLLECTION)
+
 
 @router.post("/createUser/")
 async def create_user(user: User):
@@ -37,6 +38,7 @@ async def create_user(user: User):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.put("/updateUser")
 async def update_user(Id: int, changes: dict):
     try:
@@ -52,6 +54,7 @@ async def update_user(Id: int, changes: dict):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.delete("/deleteUser")
 async def delete_user(Id: int):
     try:
@@ -59,6 +62,7 @@ async def delete_user(Id: int):
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
 
 @router.get("/getUser")
 async def get_user(Id: int):
@@ -68,7 +72,8 @@ async def get_user(Id: int):
         return response
     except Exception as e:
         return {"error": str(e)}
-    
+
+
 @router.get("/isEmailExists/")
 async def isEmailExists(Email: str):
     # Check if the email exists in the list of users
@@ -81,12 +86,14 @@ async def isEmailExists(Email: str):
             return False
     except Exception as e:
         return {"error": str(e)}
-    
+
+
 @router.get("/isUserValid/")
-async def isUserValid(Name: str , Password: str):
+async def isUserValid(Email: str, Password: str, UserType: UserTypeEnum):
     # Check if the user is valid or not
     try:
-        response = COLL.find_one({"Name": Name , "Password":Password})
+        response = COLL.find_one(
+            {"Email": Email, "Password": Password, "UserType": UserType})
         print(response)
         if response is not None:
             return True
