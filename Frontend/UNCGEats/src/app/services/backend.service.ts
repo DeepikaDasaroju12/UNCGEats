@@ -13,10 +13,6 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class BackendService {
-  addFoodItem(foodItem: FoodItem) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor(private http: HttpClient) {}
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -47,12 +43,16 @@ export class BackendService {
     );
   }
 
-  isUserValid(Email: string, Password: string, UserType: string): Observable<boolean> {
+  isUserValid(
+    Email: string,
+    Password: string,
+    UserType: string
+  ): Observable<boolean> {
     // Create a request body with the user's credentials
     const requestBody = {
       Email: Email,
       Password: Password,
-      UserType: UserType
+      UserType: UserType,
     };
 
     const params = new HttpParams({
@@ -66,9 +66,53 @@ export class BackendService {
     );
   }
 
+  updateUserLastLogged(id: number): Observable<Record<string, any>> {
+    return this.http.put<Record<string, any>>(
+      new URL('user/updateUserLastLogged', 'http://localhost:8000').toString(),
+      {},
+      {
+        params: {
+          Id: id,
+        },
+      }
+    );
+  }
+
+  loginUser(
+    Email: string,
+    Password: string,
+    UserType: string
+  ): Observable<Record<string, any>> {
+    // Create a request body with the user's credentials
+    const requestBody = {
+      Email: Email,
+      Password: Password,
+      UserType: UserType,
+    };
+
+    const params = new HttpParams({
+      fromObject: requestBody,
+    });
+
+    return this.http.get<Record<string, any>>(
+      new URL('user/loginUser', 'http://localhost:8000').toString(),
+      { params }
+    );
+  }
+
   getAllCanteens(): Observable<Canteen[]> {
     return this.http.get<Canteen[]>(
       new URL('canteen/getAllCanteens', 'http://localhost:8000').toString()
+    );
+  }
+
+  getCanteensForUser(id: number): Observable<Canteen[]> {
+    return this.http.get<Canteen[]>(
+      new URL(
+        'canteen/getAllCanteensForUser',
+        'http://localhost:8000'
+      ).toString(),
+      { params: { Id: id } }
     );
   }
 
@@ -109,8 +153,35 @@ export class BackendService {
     food_item.LastUpdated = undefined;
     food_item.Id = -1;
     return this.http.post<any>(
-      new URL('canteen/createCanteen', 'http://localhost:8000').toString(),
+      new URL('food_item/createFoodItem/', 'http://localhost:8000').toString(),
       food_item
+    );
+  }
+
+  updateFoodItem(id: number, changes: any): Observable<any> {
+    return this.http.put<any>(
+      new URL('food_item/updateFoodItem/', 'http://localhost:8000').toString(),
+      changes,
+      {
+        params: {
+          Id: id,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          accept: 'application/json',
+        },
+      }
+    );
+  }
+
+  deleteFoodItem(id: number): Observable<any> {
+    return this.http.delete<any>(
+      new URL('food_item/deleteFoodItem', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: id,
+        },
+      }
     );
   }
 
@@ -126,6 +197,17 @@ export class BackendService {
       new URL('canteen/sendCanteenRequest', 'http://localhost:8000').toString(),
 
       { params }
+    );
+  }
+
+  getCanteenMenu(canteenId: number): Observable<FoodItem[]> {
+    return this.http.get<FoodItem[]>(
+      new URL('food_item/getCanteenMenu', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: canteenId,
+        },
+      }
     );
   }
 }

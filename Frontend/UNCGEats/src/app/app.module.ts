@@ -14,8 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OwnerComponent } from './owner/owner.component';
-import { UserCanteenListViewComponent } from './user-canteen-list-view/user-canteen-list-view.component';
 import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
+import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
+import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
 // import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
@@ -29,17 +30,18 @@ import { UserLandingPageComponent } from './user-landing-page/user-landing-page.
     AdminDashboardComponent,
     OrdersComponent,
     OwnerComponent,
-    UserCanteenListViewComponent,
     UserLandingPageComponent,
+    CanteenCardListViewComponent,
+    AddEditCanteenMenuComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [BackendService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FoodItemsListComponent implements OnInit {
   foodItemForm: FormGroup = new FormGroup({});
+  back : boolean = false;
   foodItem: FoodItem = {
     Name: '',
     RestaurantId: 0,
@@ -21,14 +22,15 @@ export class FoodItemsListComponent implements OnInit {
     Reviews: [],
     AverageRating: 0,
     FoodType: FoodTypeEnum.vg,
-    Ingredients: [],
+    Ingredients: '',
     Calories: 0,
   };
-  foodItemSuccess = false;
+
 
   constructor(private backendService: BackendService, private formBuilder: FormBuilder, private router: Router) {}
-  
+
   ngOnInit(): void {
+
     this.foodItemForm = this.formBuilder.group({
       Name: ['', Validators.required],
       RestaurantId: [0, Validators.required],
@@ -40,17 +42,10 @@ export class FoodItemsListComponent implements OnInit {
       Ingredients: [''],
       Calories: [0],
     });
+
   }
 
-  addFoodItem(): void {
-    this.foodItem = this.foodItemForm.value;
-    console.log(JSON.stringify(this.foodItem));
-
-    this.backendService.createFoodItem(this.foodItem).subscribe((response: any) => {
-      console.log(response);
-      this.foodItemSuccess = true;
-      console.log('Food item added successfully!', JSON.stringify(this.foodItem));
-      // Add additional logic as needed
-    });
+  goBack() {
+    this.back = true;
   }
 }

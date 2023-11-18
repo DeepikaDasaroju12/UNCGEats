@@ -17,8 +17,9 @@ router = APIRouter(
 DB = client.get_database(DB_NAME)
 COLL = DB.get_collection(FOOD_ITEM_COLLECTION)
 
+
 @router.post("/createFoodItem/")
-async def create_fooditem(food_item : Food_Item):
+async def create_fooditem(food_item: Food_Item):
     try:
         last_id = 0
         last_document_list = list(COLL.find().sort('Id', -1).limit(1))
@@ -36,6 +37,7 @@ async def create_fooditem(food_item : Food_Item):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.put("/updateFoodItem")
 async def update_fooditem(Id: int, changes: dict):
     try:
@@ -51,6 +53,7 @@ async def update_fooditem(Id: int, changes: dict):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.delete("/deleteFoodItem")
 async def delete_fooditem(Id: int):
     try:
@@ -59,11 +62,24 @@ async def delete_fooditem(Id: int):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.get("/getFoodItem")
 async def get_fooditem(Id: int):
     try:
         response = COLL.find_one({"Id": Id})
         response['_id'] = str(response['_id'])
         return response
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get("/getCanteenMenu")
+async def get_fooditem(Id: int):
+    menu = []
+    try:
+        for response in COLL.find({"RestaurantId": Id}):
+            response['_id'] = str(response['_id'])
+            menu.append(response)
+        return menu
     except Exception as e:
         return {"error": str(e)}

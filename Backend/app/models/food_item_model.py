@@ -17,7 +17,7 @@ class Food_Item(BaseModel):
     Image : str 
     AverageRating : Optional[float] = None
     FoodType: FoodType
-    Ingredients: Optional[List[str]] = None
+    Ingredients: Optional[str] = None
     Calories: Optional[int] = None
     CreatedTime: Optional[datetime] = None
     LastUpdated: Optional[datetime] = None

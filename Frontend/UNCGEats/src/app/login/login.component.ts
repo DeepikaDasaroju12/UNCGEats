@@ -47,13 +47,22 @@ export class LoginComponent implements OnInit {
     console.log(JSON.stringify(this.user));
 
     this.backendService
-      .isUserValid(this.user.Email, this.user.Password, this.user.UserType)
+      .loginUser(this.user.Email, this.user.Password, this.user.UserType)
       .subscribe({
-        next: (response: boolean) => {
-          if (response == true) {
+        next: (response: Record<string, any>) => {
+          var data: Map<String, any> = new Map(Object.entries(response));
+          if ((data.get('loginResponse') as boolean) == true) {
             // this.loginFailed = false;
+            var userData = data.get('userData');
+            localStorage.setItem('isUserLogged', 'true');
+            localStorage.setItem('loggedUser', JSON.stringify(userData));
+            this.backendService.updateUserLastLogged(userData['Id']).subscribe({
+              next: (response: Record<string, any>) => {
+                this.router.navigate(['/userlanding']);
+              },
+              error: () => {},
+            });
 
-            this.router.navigate(['/userlanding']);
             // this.router.navigate(['/canteen'])
           } else {
             // this.backendService.createUser(this.user).subscribe((response: any) => {
@@ -62,8 +71,7 @@ export class LoginComponent implements OnInit {
             //   this.router.navigate(['/login'])
             // })
             this.loginFailed = true;
-            this.errorMessage =
-              'Invalid username or password. Please try again.';
+            this.errorMessage = data.get('userData');
             // console.log(this.errorMessage, JSON.stringify(this.user));
             alert(this.errorMessage);
           }

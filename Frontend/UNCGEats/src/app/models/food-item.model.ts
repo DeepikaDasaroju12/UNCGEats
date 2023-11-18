@@ -14,16 +14,16 @@ export interface FoodItem {
     Image: string | null;
     Reviews: string[] | null;
     AverageRating: number | null;
-    FoodType?: FoodTypeEnum; 
-    Ingredients: string[] | null;
+    FoodType?: FoodTypeEnum;
+    Ingredients: string | null;
     Calories: number | null;
     CreatedTime?: Date;
     LastUpdated?: Date
   }
-  
-  
-    
-    
-    
-    
-   
+
+
+
+
+
+
+

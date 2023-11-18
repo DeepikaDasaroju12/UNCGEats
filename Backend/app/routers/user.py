@@ -55,6 +55,22 @@ async def update_user(Id: int, changes: dict):
         return {"success": False, "error": str(e)}
 
 
+@router.put("/updateUserLastLogged")
+async def update_user_last_logged(Id: int):
+    try:
+        filter = {"Id": Id}
+        changes = {"LastLogged": datetime.now().isoformat()}
+        new_values = {"$set": changes}
+        response = COLL.update_one(filter, new_values)
+        output = {"success": False}
+        if (response.modified_count):
+            output["success"] = True
+            output["modified_count"] = str(response.modified_count)
+        return output
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 @router.delete("/deleteUser")
 async def delete_user(Id: int):
     try:
@@ -99,5 +115,28 @@ async def isUserValid(Email: str, Password: str, UserType: UserTypeEnum):
             return True
         else:
             return False
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get("/loginUser/")
+async def loginUser(Email: str, Password: str, UserType: UserTypeEnum):
+    # Check if the user is valid or not
+    user_exists = False
+    try:
+        response = COLL.find_one(
+            {"Email": Email, "Password": Password, "UserType": UserType})
+        print(response)
+        if response is not None:
+            user_exists = True
+            response["_id"] = str(response['_id'])
+        else:
+            user_exists = False
+            response = "Invalid Credentials"
+
+        return {
+            "loginResponse": user_exists,
+            "userData": response
+        }
     except Exception as e:
         return {"error": str(e)}

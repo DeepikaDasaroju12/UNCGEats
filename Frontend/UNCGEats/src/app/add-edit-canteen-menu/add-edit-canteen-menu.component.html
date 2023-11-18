@@ -1,0 +1,345 @@
+<div class="card mt-2">
+  <h2 class="mx-2 mt-2" style="display: flex; justify-content: center">
+    Add/Edit Canteen Menu
+  </h2>
+  <form class="mt-3">
+    <div class="mb-3 canteenDropDown" style="padding-left: 10px">
+      <label
+        for=""
+        class="form-label"
+        style="font-weight: bold; font-size: larger"
+        >Canteen:</label
+      >
+      <select
+        class="form-select form-select-lg"
+        name="selectedCanteen"
+        [(ngModel)]="selectedCanteen"
+        id=""
+        style="width: 15vw"
+        (ngModelChange)="getCanteenMenu()"
+      >
+        <option value="-1" disabled selected>Select One</option>
+        <option
+          class="option"
+          *ngFor="let canteen of canteenList"
+          [ngValue]="canteen.Id"
+        >
+          {{ canteen.Name }}
+        </option>
+      </select>
+    </div>
+    <!-- Table to display the list of items -->
+    <div class="scrollable-table" *ngIf="selectedCanteen > 0">
+      <button
+        class="btn btn-primary"
+        style="float: right; font-weight: bold"
+        onclick="document.getElementById('addItemModal').style.display='block'"
+      >
+        <i class="bi bi-clipboard-plus"></i> Add Item
+      </button>
+      <table id="menuTable">
+        <thead>
+          <tr>
+            <th *ngFor="let header of menuTableHeaders">{{ header }}</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Use Angular *ngFor or any other dynamic rendering mechanism to populate rows -->
+          <tr *ngFor="let row of menuData">
+            <td>{{ row.Name }}</td>
+            <td>{{ row.Description }}</td>
+            <td>{{ row.Price }}</td>
+            <td *ngIf="row.Image == ''">
+              <img
+                src="../../assets/missing_img.jpg"
+                alt=""
+                style="width: 200px; height: auto"
+              />
+            </td>
+            <td *ngIf="row.Image != ''">
+              <img
+                src="{{ row.Image }}"
+                alt=""
+                style="width: 200px; height: auto"
+              />
+            </td>
+            <td>{{ row.FoodType }}</td>
+            <td>{{ row.Ingredients }}</td>
+            <td>{{ row.Calories }}</td>
+            <td>
+              <button class="btn btn-info mx-2" (click)="editMenuItem(row)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-danger mx-2" (click)="deleteMenuItem(row)">
+                <i class="bi bi-file-earmark-excel"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p
+        *ngIf="menuData.length == 0"
+        style="display: flex; justify-content: center"
+      >
+        No Data To Display
+      </p>
+    </div>
+  </form>
+</div>
+
+<div
+  class="modal"
+  id="addItemModal"
+  tabindex="-1"
+  role="dialog"
+  style="background-color: rgba(110, 105, 110, 0.5)"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Item</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onclick="document.getElementById('addItemModal').style.display='none'"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new item -->
+        <form [formGroup]="addFoodItemForm">
+          <div class="mb-3">
+            <label for="Name" class="form-label">Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Name"
+              formControlName="Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Description"
+              formControlName="Description"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Price" class="form-label">Price:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Price"
+              formControlName="Price"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Image" class="form-label">Image:</label>
+            <input
+              type="file"
+              class="form-control"
+              id="Image"
+              formControlName="Image"
+              (change)="convertFileToBase64($event)"
+              (click)="setSpinner()"
+            />
+          </div>
+          <div
+            class="d-flex justify-content-center align-items-center"
+            *ngIf="imageUploading"
+          >
+            <div
+              class="spinner-border text-primary spinner-border-sm"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="FoodType" class="form-label">FoodType:</label>
+            <select
+              class="form-select form-select-lg"
+              name=""
+              id="FoodType"
+              formControlName="FoodType"
+            >
+              <option *ngFor="let type of foodTypes" [ngValue]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="Ingredients" class="form-label">Ingredients:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Ingredients"
+              formControlName="Ingredients"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Calories" class="form-label">Calories:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Calories"
+              formControlName="Calories"
+            />
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="addMenuItem()">
+            Add Item
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal"
+  id="updateItemModal"
+  tabindex="-1"
+  role="dialog"
+  style="background-color: rgba(110, 105, 110, 0.5)"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Item</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onclick="document.getElementById('updateItemModal').style.display='none'"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new item -->
+        <form [formGroup]="updateFoodItemForm">
+          <div class="mb-3">
+            <label for="Name" class="form-label">Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Name"
+              formControlName="Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Description"
+              formControlName="Description"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Price" class="form-label">Price:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Price"
+              formControlName="Price"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Image" class="form-label">Image:</label>
+            <input
+              type="file"
+              class="form-control"
+              id="Image"
+              formControlName="Image"
+              (change)="convertFileToBase64($event)"
+              (click)="setSpinner()"
+            />
+          </div>
+          <div
+            class="d-flex justify-content-center align-items-center"
+            *ngIf="imageUploading"
+          >
+            <div
+              class="spinner-border text-primary spinner-border-sm"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="FoodType" class="form-label">FoodType:</label>
+            <select
+              class="form-select form-select-lg"
+              name=""
+              id="FoodType"
+              formControlName="FoodType"
+            >
+              <option *ngFor="let type of foodTypes" [ngValue]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="Ingredients" class="form-label">Ingredients:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Ingredients"
+              formControlName="Ingredients"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Calories" class="form-label">Calories:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Calories"
+              formControlName="Calories"
+            />
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="updateMenuItem()">
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal"
+  id="deleteItemModal"
+  tabindex="-1"
+  role="dialog"
+  style="background-color: rgba(110, 105, 110, 0.5)"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you Sure?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onclick="document.getElementById('deleteItemModal').style.display='none'"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new item -->
+        <a name="" id="" class="btn btn-danger mx-2" (click)="deleteItem()">Delete</a>
+        <a name="" id="" class="btn btn-secondary mx-2" (click)="cancelDelete()">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

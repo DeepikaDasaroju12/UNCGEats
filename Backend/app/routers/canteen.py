@@ -79,6 +79,18 @@ async def get_all_canteens():
         return data
     except Exception as e:
         return {"error": str(e)}
+    
+
+@router.get("/getAllCanteensForUser")
+async def get_all_canteens_for_user(Id : int):
+    data = []
+    try:
+        for canteen in CANTEEN_COLL.find({"OwnerId": Id}):
+            canteen['_id'] = str(canteen['_id'])
+            data.append(canteen)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
 
 canteen_requests = []
 @router.post("/createCanteenRequests")
@@ -111,4 +123,6 @@ async def reject_canteen_request(RequestID: int):
             request.approved = False
             return request
     raise HTTPException(status_code=404, detail="Request not found")
+
+
 

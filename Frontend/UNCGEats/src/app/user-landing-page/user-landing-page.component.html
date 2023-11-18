@@ -1,28 +1,69 @@
-  <div class="container-fluid" style="background-color: #2e5888;">
-    <div class="row">
-      <div class="col-3 sidebar" style="background-color: #2e5888;">
-        <div class="card" style="height: 100vh; background-color: #2e5888; color: #fff;">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar"
-            class="img-fluid my-5" style="width: 80px;" />
-          <div class="card-body">
-            <h4 class="card-title">Title</h4>
-            <p class="card-text">Text</p>
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Item 1</li>
-                        <li class="list-group-item">Item 2</li>
-                        <li class="list-group-item">Item 3</li>
-                      </ul>
-          </div>
+<div class="container-fluid" style="background-color: #2e5888">
+  <div class="row">
+    <div class="col-3 sidebar" style="background-color: #2e5888">
+      <div class="card my-4">
+        <div class="card-body text-center">
+          <h2 class="mx-2 my-4" style="color: #103d9e; font-weight: bold">
+            {{
+              loggedUser.UserType.charAt(0).toUpperCase() +
+                loggedUser.UserType.slice(1)
+            }}
+            Landing Page
+          </h2>
+          <img
+            src="https://img.favpng.com/15/8/8/user-profile-2018-in-sight-user-conference-expo-business-default-png-favpng-5EdhQJprgN1HKZdx50LCN4zXg.jpg"
+            alt="avatar"
+            class="rounded-circle img-fluid"
+            style="width: 150px"
+          />
+          <h5 class="my-3">
+            {{ loggedUser.FirstName + " " + loggedUser.LastName }}
+          </h5>
+          <p class="text-muted mb-1">{{ loggedUser.Email }}</p>
 
+          <p class="text-muted mb-1">Phone: {{ loggedUser.PhoneNumber }}</p>
+          <p class="text-muted mb-4">
+            Last Logged: {{ loggedUser.LastLogged }}
+          </p>
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-primary">Follow</button>
+            <button type="button" class="btn btn-outline-primary ms-1">
+              Message
+            </button>
+          </div>
         </div>
       </div>
-      <div class="col-9 main-content">
-        <div class="row small-row">
-          <!-- Small Row Content -->
-        </div>
-        <div class="container big-container" style="overflow: auto; background-color: #2e5888; height:75vh">
-          <app-user-canteen-list-view> </app-user-canteen-list-view>
+      <div class="card mb-4 mb-lg-0">
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush rounded-3">
+            <li
+              class="list-group-item d-flex align-items-center p-3"
+              style="cursor: pointer"
+              *ngFor="let menuItem of menuItems | keyvalue"
+              (click)="listNavigate(menuItem.key)"
+            >
+              <i class="{{ menuItem.value }}" style="color: #3b5998"></i>
+              <p class="mb-0 mx-2">{{ menuItem.key }}</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+    <div class="col-9 main-content">
+      <div
+        class="container big-container"
+        style="overflow: auto; background-color: #2e5888; height: 95vh"
+        *ngIf="selectedEntry == 'View Canteens'"
+      >
+        <app-canteen-card-list-view> </app-canteen-card-list-view>
+      </div>
+            <div
+        class="container big-container"
+        style="overflow: auto; background-color: #2e5888; height: 95vh"
+        *ngIf="selectedEntry == 'Add/Edit Menu'"
+      >
+        <app-add-edit-canteen-menu> </app-add-edit-canteen-menu>
+      </div>
+    </div>
   </div>
+</div>

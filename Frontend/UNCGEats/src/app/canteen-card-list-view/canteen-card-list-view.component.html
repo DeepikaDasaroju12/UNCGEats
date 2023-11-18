@@ -1,0 +1,29 @@
+<div class="row row-cols-3 g-3" *ngIf="!openMenu">
+  <div class="col" *ngFor="let canteen of this.canteenList">
+    <div
+      class="card"
+      style="cursor: pointer"
+      (click)="openCanteenMenu(canteen)"
+    >
+      <img
+        src="{{ canteen.Image }}"
+        class="card-img-top"
+        style="height: 10vw; object-fit: cover"
+      />
+      <div class="card-body" style="height: 8vw; object-fit: cover">
+        <h5 class="card-title">{{ canteen.Name }}</h5>
+        <p class="card-text">
+          {{ canteen.Description }}
+          <br />
+          <strong>Working Hours:</strong>
+          <br />
+          {{ canteen.WorkingHours }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="openMenu">
+  <app-food-items-list></app-food-items-list>
+</div>
