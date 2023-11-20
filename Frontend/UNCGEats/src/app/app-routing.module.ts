@@ -12,6 +12,13 @@ import { UserLandingPageComponent } from './user-landing-page/user-landing-page.
 import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
 import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
 import { CustomerOrderHistoryComponent } from './customer-order-history/customer-order-history.component';
+import { ManageCanteenComponent } from './manage-canteen/manage-canteen.component';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { AddCanteenComponent } from './add-canteen/add-canteen.component';
+import { AddCanteenStatusComponent } from './add-canteen-status/add-canteen-status.component';
+import { ViewOwnersComponent } from './view-owners/view-owners.component';
+import { ViewCustomersComponent } from './view-customers/view-customers.component';
+import { AddCanteenRequestsComponent } from './add-canteen-requests/add-canteen-requests.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +37,13 @@ const routes: Routes = [
       { path: 'manageMenu', component: AddEditCanteenMenuComponent },
       { path: 'orderHistory', component: CustomerOrderHistoryComponent },
       { path: 'order/:canteenId', component: FoodItemsListComponent },
+      { path: 'manageCanteen', component: ManageCanteenComponent },
+      { path: 'manageOrders', component: ManageOrdersComponent },
+      { path: 'requestNewCanteen', component: AddCanteenComponent },
+      { path: 'canteenRequestStatus', component: AddCanteenStatusComponent },
+      { path: 'viewAllOwners', component: ViewOwnersComponent },
+      { path: 'viewAllCustomers', component: ViewCustomersComponent },
+      { path: 'manageCanteenRequests', component: AddCanteenRequestsComponent },
     ],
   },
 ];

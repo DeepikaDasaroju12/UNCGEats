@@ -22,6 +22,7 @@ class Food_Item(BaseModel):
     CreatedTime: Optional[datetime] = None
     LastUpdated: Optional[datetime] = None
     RestaurantId: int
+    Deleted: Optional[bool] = False
 
 
 class Menu(BaseModel):

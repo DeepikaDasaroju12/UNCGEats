@@ -31,7 +31,7 @@ export class OwnerComponent implements OnInit {
     Latitude: 0,
     Longitude: 0,
     Description: '',
-    WorkingHours: 0,
+    WorkingHours: '0',
     AverageRating: 0,
   };
 
@@ -42,7 +42,7 @@ export class OwnerComponent implements OnInit {
     Latitude: 0,
     Longitude: 0,
     Description: '',
-    WorkingHours: 0,
+    WorkingHours: '0',
     AverageRating: 0
   };
   canteenAdded: boolean = false;

@@ -19,6 +19,7 @@ export interface FoodItem {
     Calories: number | null;
     CreatedTime?: Date;
     LastUpdated?: Date
+    deleted? : boolean;
   }
 
 

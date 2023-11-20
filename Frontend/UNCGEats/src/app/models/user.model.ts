@@ -10,4 +10,5 @@ export interface User {
   LastLogged?: Date;
   Password: string;
   UserType: string;
+  deleted?: boolean
 }

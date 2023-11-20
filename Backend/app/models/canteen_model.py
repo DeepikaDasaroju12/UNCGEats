@@ -21,6 +21,7 @@ class Canteen(BaseModel):
     CreatedTime: Optional[datetime] = None
     LastUpdated: Optional[datetime] = None
     Status: Optional[CanteenStatusEnum] = None
+    Deleted: Optional[bool] = False
     
 
 class CanteenRegistration(BaseModel):

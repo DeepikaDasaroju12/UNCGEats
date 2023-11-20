@@ -28,7 +28,7 @@ export class UserLandingPageComponent implements OnInit {
       'View Orders': 'bi bi-cake2-fill',
       'Submit New Canteen Request': 'bi bi-building-fill-add',
       'View Canteen Request Status': 'bi bi-building-fill-exclamation',
-      'Delete Canteen': 'bi bi-building-fill-dash',
+      'Edit/Delete Canteen': 'bi bi-building-fill-dash',
     })
   );
   customerMenu: Map<string, string> = new Map(
@@ -85,8 +85,8 @@ export class UserLandingPageComponent implements OnInit {
       this.router.navigate(['/userlanding/requestNewCanteen']);
     } else if (value == 'View Canteen Request Status') {
       this.router.navigate(['/userlanding/canteenRequestStatus']);
-    } else if (value == 'Delete Canteen') {
-      this.router.navigate(['/userlanding/deleteCanteen']);
+    } else if (value == 'Edit/Delete Canteen') {
+      this.router.navigate(['/userlanding/manageCanteen']);
     } else if (value == 'View Owners') {
       this.router.navigate(['/userlanding/viewAllOwners']);
     } else if (value == 'View Customers') {

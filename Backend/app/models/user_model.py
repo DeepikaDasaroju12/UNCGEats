@@ -22,3 +22,4 @@ class User(BaseModel):
     LastLogged: Optional[datetime] = None
     Password: str
     UserType: UserTypeEnum
+    Deleted: Optional[bool] = False

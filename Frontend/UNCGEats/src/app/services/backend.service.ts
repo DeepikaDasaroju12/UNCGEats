@@ -185,9 +185,36 @@ export class BackendService {
     );
   }
 
+  updateCanteen(id: number, changes: any): Observable<any> {
+    return this.http.put<any>(
+      new URL('canteen/updateCanteen/', 'http://localhost:8000').toString(),
+      changes,
+      {
+        params: {
+          Id: id,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          accept: 'application/json',
+        },
+      }
+    );
+  }
+
   deleteFoodItem(id: number): Observable<any> {
     return this.http.delete<any>(
       new URL('food_item/deleteFoodItem', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: id,
+        },
+      }
+    );
+  }
+
+  deleteCanteen(id: number): Observable<any> {
+    return this.http.delete<any>(
+      new URL('canteen/deleteCanteen', 'http://localhost:8000').toString(),
       {
         params: {
           Id: id,

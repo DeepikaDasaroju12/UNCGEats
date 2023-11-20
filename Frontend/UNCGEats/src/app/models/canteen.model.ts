@@ -6,10 +6,11 @@ export interface Canteen{
     Latitude? : number
     Longitude? : number
     Description? : string
-    WorkingHours : number
+    WorkingHours : string
     AverageRating: number
     CreatedTime?: Date
     LastUpdated?: Date
     Image?: string
     _id?: string
+    deleted?: boolean
 }
