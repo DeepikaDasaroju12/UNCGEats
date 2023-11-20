@@ -18,15 +18,16 @@ router = APIRouter(
 DB = client.get_database(DB_NAME)
 COLL = DB.get_collection(ORDER_COLLECTION)
 
+
 @router.post("/createOrder/")
-async def create_order(order : Order):
+async def create_order(order: Order):
     try:
         last_id = 0
         last_document_list = list(COLL.find().sort('Id', -1).limit(1))
         if (last_document_list):
             last_id = last_document_list[0]["Id"]
         order.Id = last_id + 1
-        order.OrderedTime = datetime.now().isoformat()
+        order.OrderDate = datetime.now().isoformat()
         # Adding random mins between 15 to 30 to get pickup time
         randomMinutes = random.randint(15, 30)
         pickupTime = datetime.now() + timedelta(minutes=randomMinutes)
@@ -39,6 +40,7 @@ async def create_order(order : Order):
         return output
     except Exception as e:
         return {"success": False, "error": str(e)}
+
 
 @router.put("/updateOrder")
 async def update_order(Id: int, changes: dict):
@@ -55,6 +57,7 @@ async def update_order(Id: int, changes: dict):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.delete("/deleteOrder")
 async def delete_order(Id: int):
     try:
@@ -62,6 +65,19 @@ async def delete_order(Id: int):
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+
+@router.get("/getOrdersForCustomer")
+async def get_order(Id: int):
+    data = []
+    try:
+        for order in COLL.find({"CustomerId": Id}):
+            order['_id'] = str(order['_id'])
+            data.append(order)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+
 
 @router.get("/getOrder")
 async def get_order(Id: int):

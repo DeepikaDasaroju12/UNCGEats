@@ -26,9 +26,9 @@
             Last Logged: {{ loggedUser.LastLogged }}
           </p>
           <div class="d-flex justify-content-center mb-2">
-            <button type="button" class="btn btn-primary">Follow</button>
-            <button type="button" class="btn btn-outline-primary ms-1">
-              Message
+            <button type="button" class="btn btn-primary" (click)="logOut()">Log Out</button>
+            <button type="button" class="btn btn-danger ms-1" (click)="deleteUser()">
+              Delete Account
             </button>
           </div>
         </div>
@@ -50,20 +50,7 @@
       </div>
     </div>
     <div class="col-9 main-content">
-      <div
-        class="container big-container"
-        style="overflow: auto; background-color: #2e5888; height: 95vh"
-        *ngIf="selectedEntry == 'View Canteens'"
-      >
-        <app-canteen-card-list-view> </app-canteen-card-list-view>
-      </div>
-            <div
-        class="container big-container"
-        style="overflow: auto; background-color: #2e5888; height: 95vh"
-        *ngIf="selectedEntry == 'Add/Edit Menu'"
-      >
-        <app-add-edit-canteen-menu> </app-add-edit-canteen-menu>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

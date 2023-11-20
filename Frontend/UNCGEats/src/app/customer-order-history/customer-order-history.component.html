@@ -1,0 +1,87 @@
+<div class="card mt-2">
+  <h2 class="mx-2 mt-2" style="display: flex; justify-content: center">
+    Order History/Status
+  </h2>
+
+  <!-- <div>
+    <h4 class="mx-4"><b>Current Order Status</b></h4>
+
+    <mdb-carousel
+      [controls]="true"
+      [indicators]="true"
+
+      class="carousel-dark"
+      style="width: 50vw; height: 20vh; display: flex; justify-content: center"
+    >
+      <mdb-carousel-item
+        style="display: flex; justify-content: center"
+        *ngFor="let order of recentOrders"
+      >
+        <div
+          class="card"
+          style="
+            height: 20vh;
+            width: 40vw;
+            display: flex;
+            justify-content: center;
+          "
+        >
+          {{ order.Id }}
+        </div>
+        <mdb-carousel-item style="display: flex; justify-content: center" active>
+          <div class="card" style="height: 20vh; width: 40vw">test2</div>
+        </mdb-carousel-item>
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div> -->
+
+  <div class="scrollable-table">
+    <!-- <h4><b>Order History</b></h4> -->
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngFor="let order of userOrders.slice().reverse()"
+        class="mt-4"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ order.formattedDate }} </mat-panel-title>
+          <mat-panel-title> Order Id: {{ order.Id }} </mat-panel-title>
+          <mat-panel-title> Quantity: {{ order.TotalItems }} </mat-panel-title>
+          <mat-panel-title>
+            Total: $ {{ order.TotalPrice.toFixed(2) }}
+          </mat-panel-title>
+          <mat-panel-title> Status: {{ order.OrderStatus }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table class="mx-3" style="border: none">
+          <thead>
+            <tr>
+              <th style="padding-left: 15px">Item</th>
+              <th style="padding-left: 15px">Quantity</th>
+              <th style="padding-left: 15px">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.orderedItemsDetails">
+              <td style="padding-left: 15px">
+                <img
+                  src="{{ item.Item.Image }}"
+                  style="width: 50px; height: 50px; object-fit: fill"
+                />
+                {{ item.Item.Name }}
+              </td>
+              <td style="padding-left: 15px">{{ item.Quantity }}</td>
+              <td style="padding-left: 15px">
+                $ {{ (item.Item.Price! * item.Quantity!).toFixed(2) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p
+      *ngIf="userOrders.length == 0"
+      style="display: flex; justify-content: center"
+    >
+      No Data To Display
+    </p>
+  </div>
+</div>

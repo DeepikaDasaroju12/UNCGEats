@@ -1,15 +1,104 @@
-<div class="card mt-2" *ngIf="!back">
-  <button
-    class="btn btn-primary mt-2 mx-2"
-    (click)="goBack()"
-    style="float: left; width: 250px"
-  >
-    <i class="bi bi-chevron-left me-3"></i>Go Back To Canteen List
-  </button>
+<div class="card mt-2">
   <div class="card-body">
-    <h4 class="card-title">Canteen Menu</h4>
+    <h4 class="card-title" style="display: flex; justify-content: center">
+      Canteen Menu
+    </h4>
   </div>
-</div>
-<div *ngIf="back">
-  <app-canteen-card-list-view></app-canteen-card-list-view>
+  <div class="card-body">
+    <div class="row">
+      <div class="col col-md-8">
+        <div class="card" style="height: 70vh; border-radius: 15px">
+          <div class="row row-cols-3 g-3">
+            <div class="col" *ngFor="let item of menuItems">
+              <div class="card ms-4 mt-4" style="border: none">
+                <img
+                  src="{{ item.Image }}"
+                  class="card-img-top"
+                  style="height: 10vw; object-fit: cover; border: none"
+                />
+                <div class="card-body">
+                  <h5
+                    class="card-title"
+                    style="display: flex; justify-content: center"
+                  >
+                    {{ item.Name }}
+                  </h5>
+                  <h5
+                    class="card-title"
+                    style="display: flex; justify-content: center"
+                  >
+                    ${{ item.Price }}
+                  </h5>
+                  <div style="display: flex; justify-content: center">
+                    <button
+                      class="btn btn-primary btn-sm"
+                      (click)="decreaseQuantity(menuItems.indexOf(item))"
+                    >
+                      -
+                    </button>
+                    <span class="mx-2">{{
+                      menuQuantity[menuItems.indexOf(item)]
+                    }}</span>
+                    <button
+                      class="btn btn-primary btn-sm"
+                      (click)="increaseQuantity(menuItems.indexOf(item))"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-4">
+        <div class="card" style="height: 70vh; border-radius: 15px">
+          <h4
+            class="card-title mt-2"
+            style="display: flex; justify-content: center"
+          >
+            Shopping Cart
+          </h4>
+          <hr />
+          <p style="display: flex; justify-content: center">
+            You have {{ cartItems }} items in your Cart
+          </p>
+          <table class="mx-3" style="border: none">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of shoppingCart.keys()">
+                <td>
+                  <img
+                    src="{{ item.Image }}"
+                    style="width: 50px; height: 50px; object-fit: fill"
+                  />
+                  {{ item.Name }}
+                </td>
+                <td>{{ shoppingCart.get(item) }}</td>
+                <td>
+                  $ {{ (item.Price! * shoppingCart.get(item)!).toFixed(2) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="showTotal">
+            <hr />
+            <b class="mx-5" style="display: flex; justify-content: end"
+              >Total: $ {{ totalPrice.toFixed(2) }}</b
+            >
+            <button class="btn btn-primary mx-2" (click)="placeOrder()">
+              Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

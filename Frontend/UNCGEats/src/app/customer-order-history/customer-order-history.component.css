@@ -1,0 +1,6 @@
+        .scrollable-table {
+          height: 32vw;
+          overflow-y: auto;
+          padding: 25px;
+        }
+

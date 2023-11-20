@@ -1,4 +1,4 @@
-<div class="row row-cols-3 g-3" *ngIf="!openMenu">
+<div class="row row-cols-3 g-3">
   <div class="col" *ngFor="let canteen of this.canteenList">
     <div
       class="card"
@@ -22,8 +22,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="openMenu">
-  <app-food-items-list></app-food-items-list>
 </div>

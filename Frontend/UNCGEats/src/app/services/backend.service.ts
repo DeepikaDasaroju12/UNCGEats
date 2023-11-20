@@ -143,7 +143,7 @@ export class BackendService {
     order.LastUpdated = undefined;
     order.Id = -1;
     return this.http.post<any>(
-      new URL('canteen/createCanteen', 'http://localhost:8000').toString(),
+      new URL('order/createOrder', 'http://localhost:8000').toString(),
       order
     );
   }
@@ -155,6 +155,17 @@ export class BackendService {
     return this.http.post<any>(
       new URL('food_item/createFoodItem/', 'http://localhost:8000').toString(),
       food_item
+    );
+  }
+
+  getFoodItem(id: number): Observable<FoodItem> {
+    return this.http.get<FoodItem>(
+      new URL('food_item/getFoodItem/', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: id,
+        },
+      }
     );
   }
 
@@ -206,6 +217,17 @@ export class BackendService {
       {
         params: {
           Id: canteenId,
+        },
+      }
+    );
+  }
+
+  getOrderHistory(customerId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      new URL('order/getOrdersForCustomer', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: customerId,
         },
       }
     );

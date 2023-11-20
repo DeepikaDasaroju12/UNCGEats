@@ -17,6 +17,10 @@ import { OwnerComponent } from './owner/owner.component';
 import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
 import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CustomerOrderHistoryComponent } from './customer-order-history/customer-order-history.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 // import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
@@ -33,13 +37,17 @@ import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-ca
     UserLandingPageComponent,
     CanteenCardListViewComponent,
     AddEditCanteenMenuComponent,
+    CustomerOrderHistoryComponent,
   ],
   imports: [
+    MdbCarouselModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
   ],
   providers: [BackendService],
   bootstrap: [AppComponent],

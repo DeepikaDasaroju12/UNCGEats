@@ -58,25 +58,17 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('loggedUser', JSON.stringify(userData));
             this.backendService.updateUserLastLogged(userData['Id']).subscribe({
               next: (response: Record<string, any>) => {
-                this.router.navigate(['/userlanding']);
+                this.router.navigate(['/userlanding/viewCanteens']);
               },
               error: () => {},
             });
-
-            // this.router.navigate(['/canteen'])
           } else {
-            // this.backendService.createUser(this.user).subscribe((response: any) => {
-            //   console.log(response);
-            //   console.log('Signup successful! Signup data:', JSON.stringify(this.user));
-            //   this.router.navigate(['/login'])
-            // })
             this.loginFailed = true;
             this.errorMessage = data.get('userData');
             // console.log(this.errorMessage, JSON.stringify(this.user));
             alert(this.errorMessage);
           }
         },
-
         error: () => {},
       });
   }

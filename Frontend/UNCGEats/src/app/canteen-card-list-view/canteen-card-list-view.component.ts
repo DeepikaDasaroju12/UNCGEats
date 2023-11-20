@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { BackendService } from '../services/backend.service';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Canteen } from '../models/canteen.model';
 
@@ -23,13 +22,7 @@ export class CanteenCardListViewComponent implements OnInit {
 
   canteenList: Canteen[] = [];
 
-  openMenu: boolean = false;
-
-  constructor(
-    private backendService: BackendService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private backendService: BackendService, private router: Router) {}
 
   ngOnInit(): void {
     var isUserLogged = localStorage.getItem('isUserLogged');
@@ -55,7 +48,7 @@ export class CanteenCardListViewComponent implements OnInit {
   openCanteenMenu(canteen: Canteen) {
     if (this.loggedUser.UserType == 'customer') {
       localStorage.setItem('canteenForMenu', canteen.Id!.toString());
-      this.openMenu = true;
+      this.router.navigate(['/userlanding/order', canteen.Id!]);
     }
   }
 }
