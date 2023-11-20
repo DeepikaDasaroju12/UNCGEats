@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    localStorage.setItem('isUserLogged', 'false');
     this.loginForm = this.formBuilder.group({
       Email: ['', Validators.required],
       Password: ['', Validators.required],
@@ -44,8 +45,6 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginFailed = false;
     this.user = this.loginForm.value;
-    console.log(JSON.stringify(this.user));
-
     this.backendService
       .loginUser(this.user.Email, this.user.Password, this.user.UserType)
       .subscribe({

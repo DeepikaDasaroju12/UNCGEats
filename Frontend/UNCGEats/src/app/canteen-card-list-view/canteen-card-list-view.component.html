@@ -8,16 +8,22 @@
       <img
         src="{{ canteen.Image }}"
         class="card-img-top"
-        style="height: 10vw; object-fit: cover"
+        style="height: 12vw; object-fit: cover"
       />
-      <div class="card-body" style="height: 8vw; object-fit: cover">
-        <h5 class="card-title">{{ canteen.Name }}</h5>
+      <div class="card-body" style="height: 12vw; object-fit: contain">
+        <h4 class="card-title">
+          <b>{{ canteen.Name }}</b>
+        </h4>
         <p class="card-text">
           {{ canteen.Description }}
           <br />
           <strong>Working Hours:</strong>
           <br />
           {{ canteen.WorkingHours }}
+          <br />
+          <strong>Address:</strong>
+          <br />
+          {{ canteen.Address }}
         </p>
       </div>
     </div>
