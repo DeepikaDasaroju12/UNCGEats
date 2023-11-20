@@ -12,5 +12,25 @@ export interface Canteen{
     LastUpdated?: Date
     Image?: string
     _id?: string
-    deleted?: boolean
+    Deleted?: boolean
+    Status? : CanteenStatus
+    Comments? : string
 }
+
+
+export enum CanteenStatus {
+    requested = 'Requested',
+    approved = 'Approved',
+    rejected = 'Rejected'
+}
+
+export interface CanteenRegistration {
+  Id?: number;
+  Created?: Date;
+  OwnerId: number;
+  CanteenId: number;
+  Status: CanteenStatus;
+  Comments?: string;
+  LastUpdated?: Date;
+}
+

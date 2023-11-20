@@ -11,9 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CanteenComponent } from './canteen/canteen.component';
 import { BackendService } from './services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
-import { OwnerComponent } from './owner/owner.component';
 import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
 import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
@@ -22,12 +20,12 @@ import { CustomerOrderHistoryComponent } from './customer-order-history/customer
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { ManageCanteenComponent } from './manage-canteen/manage-canteen.component';
-import { AddCanteenComponent } from './add-canteen/add-canteen.component';
-import { AddCanteenStatusComponent } from './add-canteen-status/add-canteen-status.component';
-import { AddCanteenRequestsComponent } from './add-canteen-requests/add-canteen-requests.component';
 import { ViewOwnersComponent } from './view-owners/view-owners.component';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+
 // import { RequestsComponent } from './requests/requests.component';
 
 @NgModule({
@@ -38,17 +36,12 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
     SignupComponent,
     HomeComponent,
     CanteenComponent,
-    AdminDashboardComponent,
     OrdersComponent,
-    OwnerComponent,
     UserLandingPageComponent,
     CanteenCardListViewComponent,
     AddEditCanteenMenuComponent,
     CustomerOrderHistoryComponent,
     ManageCanteenComponent,
-    AddCanteenComponent,
-    AddCanteenStatusComponent,
-    AddCanteenRequestsComponent,
     ViewOwnersComponent,
     ViewCustomersComponent,
     ManageOrdersComponent,
@@ -62,6 +55,8 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatExpansionModule,
+    MatTabsModule,
+    MatChipsModule,
   ],
   providers: [BackendService],
   bootstrap: [AppComponent],

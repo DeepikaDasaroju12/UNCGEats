@@ -47,6 +47,8 @@ async def update_order(Id: int, changes: dict):
     try:
         filter = {"Id": Id}
         changes["LastUpdated"] = datetime.now().isoformat()
+        if ('_id' in changes.keys()):
+            changes.pop('_id')
         new_values = {"$set": changes}
         response = COLL.update_one(filter, new_values)
         output = {"success": False}
@@ -85,5 +87,36 @@ async def get_order(Id: int):
         response = COLL.find_one({"Id": Id})
         response['_id'] = str(response['_id'])
         return response
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get("/getActiveOrdersForCanteen")
+async def get_order(Id: int):
+    data = []
+    active_statuses = [
+        'received',
+        'confirmed',
+        'preparing',
+        'prepared',
+        'readyToPickup']
+    try:
+        for order in COLL.find({"CanteenId": Id, "OrderStatus": {"$in": active_statuses}}):
+            order['_id'] = str(order['_id'])
+            data.append(order)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get("/getClosedOrdersForCanteen")
+async def get_order(Id: int):
+    data = []
+    closed_statuses = ['canceled', 'pickedUp']
+    try:
+        for order in COLL.find({"CanteenId": Id, "OrderStatus": {"$in": closed_statuses}}):
+            order['_id'] = str(order['_id'])
+            data.append(order)
+        return data
     except Exception as e:
         return {"error": str(e)}

@@ -98,7 +98,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add New Item</h5>
+        <h4 class="modal-title"><b>Add New Item</b></h4>
         <button
           type="button"
           class="btn-close"
@@ -200,8 +200,6 @@
   </div>
 </div>
 
-
-
 <div
   class="modal"
   id="updateItemModal"
@@ -212,7 +210,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Update Item</h5>
+        <h4 class="modal-title"><b>Update Item</b></h4>
         <button
           type="button"
           class="btn-close"
@@ -305,7 +303,11 @@
             />
           </div>
 
-          <button type="button" class="btn btn-primary" (click)="updateMenuItem()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="updateMenuItem()"
+          >
             Update
           </button>
         </form>
@@ -313,8 +315,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div
   class="modal"
@@ -326,7 +326,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Are you Sure?</h5>
+        <h4 class="modal-title"><b>Are you Sure?</b></h4>
         <button
           type="button"
           class="btn-close"
@@ -337,8 +337,12 @@
       </div>
       <div class="modal-body">
         <!-- Form for adding a new item -->
-        <a name="" id="" class="btn btn-danger mx-2" (click)="deleteItem()">Delete</a>
-        <a name="" id="" class="btn btn-secondary mx-2" (click)="cancelDelete()">Cancel</a>
+        <a name="" id="" class="btn btn-danger mx-2" (click)="deleteItem()"
+          >Delete</a
+        >
+        <a name="" id="" class="btn btn-secondary mx-2" (click)="cancelDelete()"
+          >Cancel</a
+        >
       </div>
     </div>
   </div>

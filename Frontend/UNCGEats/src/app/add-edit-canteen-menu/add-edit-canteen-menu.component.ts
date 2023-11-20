@@ -92,7 +92,7 @@ export class AddEditCanteenMenuComponent implements OnInit {
       this.addFoodItemForm = this.formBuilder.group({
         Name: ['', Validators.required],
         RestaurantId: ['', Validators.required],
-        Description: ['owner', Validators.required],
+        Description: ['', Validators.required],
         Price: [0, Validators.required],
         Image: [''],
         Reviews: [[]],
@@ -104,7 +104,7 @@ export class AddEditCanteenMenuComponent implements OnInit {
       this.updateFoodItemForm = this.formBuilder.group({
         Name: ['', Validators.required],
         RestaurantId: ['', Validators.required],
-        Description: ['owner', Validators.required],
+        Description: ['', Validators.required],
         Price: [0, Validators.required],
         Image: [''],
         Reviews: [[]],
@@ -137,14 +137,31 @@ export class AddEditCanteenMenuComponent implements OnInit {
         console.log(JSON.stringify(response));
         this.getCanteenMenu();
         document.getElementById('addItemModal')!.style.display = 'none';
+        this.addFoodItemForm = this.formBuilder.group({
+          Name: ['', Validators.required],
+          RestaurantId: ['', Validators.required],
+          Description: ['', Validators.required],
+          Price: [0, Validators.required],
+          Image: [''],
+          Reviews: [[]],
+          AverageRating: [0],
+          FoodType: [FoodTypeEnum.nv],
+          Ingredients: [''],
+          Calories: [0],
+        });
       },
     });
+    this.uploadedImageStr = ''
   }
 
   updateMenuItem() {
     this.newFoodItem = this.updateFoodItemForm.value;
     this.newFoodItem.RestaurantId = this.selectedCanteen;
-    this.newFoodItem.Image = this.uploadedImageStr;
+    if (this.uploadedImageStr == '') {
+      this.newFoodItem.Image = this.updateFoodItem.Image;
+    } else {
+      this.newFoodItem.Image = this.uploadedImageStr
+    }
     this.backendService
       .updateFoodItem(this.updateFoodItem.Id!, JSON.stringify(this.newFoodItem))
       .subscribe({
@@ -154,6 +171,7 @@ export class AddEditCanteenMenuComponent implements OnInit {
           document.getElementById('updateItemModal')!.style.display = 'none';
         },
       });
+    this.uploadedImageStr = ''
   }
 
   deleteMenuItem(data: FoodItem) {

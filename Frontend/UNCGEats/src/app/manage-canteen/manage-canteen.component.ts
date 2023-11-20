@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Canteen } from '../models/canteen.model';
+import {
+  Canteen,
+  CanteenRegistration,
+  CanteenStatus,
+} from '../models/canteen.model';
 import { FoodTypeEnum } from '../models/food-item.model';
 import { User } from '../models/user.model';
 import { BackendService } from '../services/backend.service';
@@ -30,7 +34,15 @@ export class ManageCanteenComponent implements OnInit {
     WorkingHours: '',
     AverageRating: 0,
     Image: '',
-    deleted: false,
+    Deleted: false,
+  };
+
+  newCanteenRequest: CanteenRegistration = {
+    Id: -1,
+    OwnerId: -1,
+    CanteenId: -1,
+    Status: CanteenStatus.requested,
+    Comments: '',
   };
 
   updatedCanteen: Canteen = {
@@ -42,10 +54,11 @@ export class ManageCanteenComponent implements OnInit {
     WorkingHours: '',
     AverageRating: 0,
     Image: '',
-    deleted: false,
+    Deleted: false,
   };
   canteenList: Canteen[] = [];
   canteenRequestList: Canteen[] = [];
+  canteenRejectList: Canteen[] = [];
   canteenTableHeaders: string[] = [
     'Name',
     'Description',
@@ -73,15 +86,16 @@ export class ManageCanteenComponent implements OnInit {
       this.loggedUser = JSON.parse(userDetails!.toString()) as User;
       this.addCanteenForm = this.formBuilder.group({
         Name: ['', Validators.required],
-        Description: ['owner', Validators.required],
+        Description: ['', Validators.required],
         Image: [''],
         AverageRating: [0],
         Address: [''],
         WorkingHours: [''],
+        Comments: [''],
       });
       this.updateCanteenForm = this.formBuilder.group({
         Name: ['', Validators.required],
-        Description: ['owner', Validators.required],
+        Description: ['', Validators.required],
         Image: [''],
         AverageRating: [0],
         Address: [''],
@@ -91,6 +105,16 @@ export class ManageCanteenComponent implements OnInit {
         this.backendService.getCanteensForUser(this.loggedUser.Id!).subscribe({
           next: (response: Canteen[]) => {
             this.canteenList = response;
+          },
+        });
+        this.backendService.getPendingCanteens(this.loggedUser.Id!).subscribe({
+          next: (response: Canteen[]) => {
+            this.canteenRequestList = response;
+          },
+        });
+        this.backendService.getRejectedCanteens(this.loggedUser.Id!).subscribe({
+          next: (response: Canteen[]) => {
+            this.canteenRejectList = response;
           },
         });
       }
@@ -105,12 +129,26 @@ export class ManageCanteenComponent implements OnInit {
         this.canteenList = response;
       },
     });
+    this.backendService.getPendingCanteens(this.loggedUser.Id!).subscribe({
+      next: (response: Canteen[]) => {
+        this.canteenRequestList = response;
+      },
+    });
+    this.backendService.getRejectedCanteens(this.loggedUser.Id!).subscribe({
+      next: (response: Canteen[]) => {
+        this.canteenRejectList = response;
+      },
+    });
   }
 
   updateCanteen() {
     this.newCanteen = this.updateCanteenForm.value;
     this.newCanteen.OwnerId = this.loggedUser.Id!;
-    this.newCanteen.Image = this.uploadedImageStr;
+    if (this.uploadedImageStr == '') {
+      this.newCanteen.Image = this.updatedCanteen.Image;
+    } else {
+      this.newCanteen.Image = this.uploadedImageStr;
+    }
     this.backendService
       .updateCanteen(this.updatedCanteen.Id!, JSON.stringify(this.newCanteen))
       .subscribe({
@@ -120,6 +158,7 @@ export class ManageCanteenComponent implements OnInit {
           document.getElementById('updateItemModal')!.style.display = 'none';
         },
       });
+    this.uploadedImageStr = '';
   }
 
   editCanteen(data: Canteen) {
@@ -172,5 +211,35 @@ export class ManageCanteenComponent implements OnInit {
 
   cancelDelete() {
     document.getElementById('deleteItemModal')!.style.display = 'none';
+  }
+
+  addCanteen() {
+    this.newCanteen = this.addCanteenForm.value;
+    this.newCanteen.OwnerId = this.loggedUser.Id!;
+    this.newCanteen.Image = this.uploadedImageStr;
+    this.newCanteen.Status = CanteenStatus.requested;
+
+    this.newCanteenRequest.OwnerId = this.loggedUser.Id!;
+    this.newCanteenRequest.Comments = this.newCanteen.Comments;
+    this.backendService
+      .createCanteen(this.newCanteen, this.newCanteenRequest)
+      .subscribe({
+        next: (response: any) => {
+          this.getCurrentCanteenList();
+          document.getElementById('addItemModal')!.style.display = 'none';
+          this.addCanteenForm = this.formBuilder.group({
+            Name: ['', Validators.required],
+            Description: ['', Validators.required],
+            Image: [''],
+            AverageRating: [0],
+            Address: [''],
+            WorkingHours: [''],
+            Comments: [''],
+          });
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 }

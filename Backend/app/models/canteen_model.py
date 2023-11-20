@@ -4,9 +4,9 @@ from typing import List, Optional
 from enum import Enum
 
 class CanteenStatusEnum(str, Enum):
-    requested = 'requested'
-    approved = 'approved'
-    rejected = 'rejected'
+    requested = 'Requested'
+    approved = 'Approved'
+    rejected = 'Rejected'
 
 class Canteen(BaseModel):
     Name : str
@@ -20,16 +20,18 @@ class Canteen(BaseModel):
     AverageRating: Optional[float] = None
     CreatedTime: Optional[datetime] = None
     LastUpdated: Optional[datetime] = None
-    Status: Optional[CanteenStatusEnum] = None
+    Status: CanteenStatusEnum = 'Requested'
     Deleted: Optional[bool] = False
+    Image: str = ''
     
 
 class CanteenRegistration(BaseModel):
     Id: int
-    Created: datetime
+    Created: Optional[datetime] = None
     OwnerId: int
     CanteenId: int
-    status: CanteenStatusEnum
+    Status: CanteenStatusEnum = 'Requested'
     Comments: Optional[str] = None
+    LastUpdated: Optional[datetime] = None
     
 

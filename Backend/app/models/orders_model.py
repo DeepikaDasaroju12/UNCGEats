@@ -11,6 +11,7 @@ class OrderStatusEnum(str, Enum):
     prepared = 'prepared'
     ready_to_pickup = 'readyToPickup'
     canceled = 'canceled'
+    picked_up = "pickedUp"
 
 
 class Order(BaseModel):

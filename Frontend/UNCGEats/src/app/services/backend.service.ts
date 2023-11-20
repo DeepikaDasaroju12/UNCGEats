@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { AppSettings } from '../app-settings';
-import { Owner } from '../models/owner.model';
-import { Canteen } from '../models/canteen.model';
+import { Canteen, CanteenRegistration } from '../models/canteen.model';
 import { Order } from '../models/order.model';
 import { FoodItem } from '../models/food-item.model';
 import { FormGroup } from '@angular/forms';
@@ -116,24 +115,19 @@ export class BackendService {
     );
   }
 
-  createOwner(owner: Owner): Observable<any> {
-    owner.CreatedTime = undefined;
-    owner.LastLogged = undefined;
-    owner.LastUpdated = undefined;
-    owner.Id = -1;
-    return this.http.post<any>(
-      new URL('owner/createOwner', 'http://localhost:8000').toString(),
-      owner
-    );
-  }
-
-  createCanteen(canteen: Canteen): Observable<any> {
+  createCanteen(
+    canteen: Canteen,
+    canteenRequest: CanteenRegistration
+  ): Observable<any> {
     canteen.CreatedTime = undefined;
     canteen.LastUpdated = undefined;
     canteen.Id = -1;
     return this.http.post<any>(
       new URL('canteen/createCanteen', 'http://localhost:8000').toString(),
-      canteen
+      {
+        canteen: canteen,
+        canteenRequest: canteenRequest,
+      }
     );
   }
 
@@ -255,6 +249,62 @@ export class BackendService {
       {
         params: {
           Id: customerId,
+        },
+      }
+    );
+  }
+
+  getPendingCanteens(ownerId: number): Observable<Canteen[]> {
+    return this.http.get<Canteen[]>(
+      new URL(
+        'canteen/getPendingCanteensForOwner',
+        'http://localhost:8000'
+      ).toString(),
+      { params: { Id: ownerId } }
+    );
+  }
+
+  getRejectedCanteens(ownerId: number): Observable<Canteen[]> {
+    return this.http.get<Canteen[]>(
+      new URL(
+        'canteen/getRejectedCanteensForOwner',
+        'http://localhost:8000'
+      ).toString(),
+      { params: { Id: ownerId } }
+    );
+  }
+
+  getActiveCanteenOrders(canteenId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      new URL(
+        'order/getActiveOrdersForCanteen',
+        'http://localhost:8000'
+      ).toString(),
+      { params: { Id: canteenId } }
+    );
+  }
+
+  getClosedCanteenOrders(canteenId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      new URL(
+        'order/getClosedOrdersForCanteen',
+        'http://localhost:8000'
+      ).toString(),
+      { params: { Id: canteenId } }
+    );
+  }
+
+  updateOrder(id: number, changes: any): Observable<any> {
+    return this.http.put<any>(
+      new URL('order/updateOrder', 'http://localhost:8000').toString(),
+      changes,
+      {
+        params: {
+          Id: id,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          accept: 'application/json',
         },
       }
     );
