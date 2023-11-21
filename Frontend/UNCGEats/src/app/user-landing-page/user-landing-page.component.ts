@@ -39,7 +39,6 @@ export class UserLandingPageComponent implements OnInit {
   adminMenu: Map<string, string> = new Map(
     Object.entries({
       'View Canteens': 'bi bi-buildings',
-      'View Owners': 'bi bi-menu-up',
       'View Users': 'bi bi-cake2-fill',
       'New Canteen Requests': 'bi bi-building-fill-add',
     })
@@ -81,10 +80,8 @@ export class UserLandingPageComponent implements OnInit {
       this.router.navigate(['/userlanding/manageOrders']);
     } else if (value == 'Manage Canteens') {
       this.router.navigate(['/userlanding/manageCanteen']);
-    } else if (value == 'View Owners') {
+    } else if (value == 'View Users') {
       this.router.navigate(['/userlanding/viewAllOwners']);
-    } else if (value == 'View Customers') {
-      this.router.navigate(['/userlanding/viewAllCustomers']);
     } else if (value == 'New Canteen Requests') {
       this.router.navigate(['/userlanding/manageCanteenRequests']);
     }

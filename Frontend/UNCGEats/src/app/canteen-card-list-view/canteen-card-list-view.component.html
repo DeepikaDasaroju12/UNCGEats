@@ -9,6 +9,13 @@
         src="{{ canteen.Image }}"
         class="card-img-top"
         style="height: 12vw; object-fit: cover"
+        *ngIf="canteen.Image != ''"
+      />
+      <img
+        src="../../assets/missing_img.jpg"
+        class="card-img-top"
+        style="height: 12vw; object-fit: cover"
+        *ngIf="canteen.Image == ''"
       />
       <div class="card-body" style="height: 12vw; object-fit: contain">
         <h4 class="card-title">

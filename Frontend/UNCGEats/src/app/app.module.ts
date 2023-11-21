@@ -8,10 +8,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CanteenComponent } from './canteen/canteen.component';
 import { BackendService } from './services/backend.service';
 import { HttpClientModule } from '@angular/common/http';
-import { OrdersComponent } from './orders/orders.component';
 import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
 import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
@@ -25,6 +23,7 @@ import { ViewCustomersComponent } from './view-customers/view-customers.componen
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
+import { ManageCanteenRequestsComponent } from './manage-canteen-requests/manage-canteen-requests.component';
 
 // import { RequestsComponent } from './requests/requests.component';
 
@@ -35,8 +34,6 @@ import { MatChipsModule } from '@angular/material/chips';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    CanteenComponent,
-    OrdersComponent,
     UserLandingPageComponent,
     CanteenCardListViewComponent,
     AddEditCanteenMenuComponent,
@@ -45,6 +42,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ViewOwnersComponent,
     ViewCustomersComponent,
     ManageOrdersComponent,
+    ManageCanteenRequestsComponent,
   ],
   imports: [
     MdbCarouselModule,

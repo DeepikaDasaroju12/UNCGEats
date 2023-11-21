@@ -15,6 +15,13 @@
                   src="{{ item.Image }}"
                   class="card-img-top"
                   style="height: 10vw; object-fit: cover; border: none"
+                  *ngIf="item.Image != ''"
+                />
+                <img
+                  src="../../assets/missing_img.jpg"
+                  class="card-img-top"
+                  style="height: 10vw; object-fit: cover; border: none"
+                  *ngIf="item.Image == ''"
                 />
                 <div class="card-body">
                   <h5
@@ -74,9 +81,16 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of shoppingCart.keys()">
-                <td>
+                <td *ngIf="item.Image != ''">
                   <img
                     src="{{ item.Image }}"
+                    style="width: 50px; height: 50px; object-fit: fill"
+                  />
+                  {{ item.Name }}
+                </td>
+                <td *ngIf="item.Image == ''">
+                  <img
+                    src="../../assets/missing_img.jpg"
                     style="width: 50px; height: 50px; object-fit: fill"
                   />
                   {{ item.Name }}

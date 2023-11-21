@@ -19,6 +19,7 @@ DB = client.get_database(DB_NAME)
 CANTEEN_COLL = DB.get_collection(CANTEEN_COLLECTION)
 CANTEEN_REG_COLL = DB.get_collection(CANTEEN_REGISTRATIONS_COLLECTION)
 
+
 @router.post("/createCanteen/")
 async def create_canteen(canteen: Canteen, canteenRequest: CanteenRegistration):
     try:
@@ -29,19 +30,22 @@ async def create_canteen(canteen: Canteen, canteenRequest: CanteenRegistration):
         canteen.Id = last_id + 1
         canteen.CreatedTime = datetime.now().isoformat()
         canteen.LastUpdated = None
-        response = CANTEEN_COLL.insert_one(json.loads(canteen.model_dump_json()))
+        response = CANTEEN_COLL.insert_one(
+            json.loads(canteen.model_dump_json()))
         output = {"success": False}
         if (response.inserted_id):
             output["success_create_canteen"] = True
             output["canteen_insert_id"] = str(response.inserted_id)
         last_id = 0
-        last_document_list = list(CANTEEN_REG_COLL.find().sort('Id', -1).limit(1))
+        last_document_list = list(
+            CANTEEN_REG_COLL.find().sort('Id', -1).limit(1))
         if (last_document_list):
             last_id = last_document_list[0]["Id"]
         canteenRequest.Id = last_id + 1
         canteenRequest.Created = datetime.now().isoformat()
         canteenRequest.CanteenId = canteen.Id
-        response = CANTEEN_REG_COLL.insert_one(json.loads(canteenRequest.model_dump_json()))
+        response = CANTEEN_REG_COLL.insert_one(
+            json.loads(canteenRequest.model_dump_json()))
         if (response.inserted_id):
             output["success_create_request"] = True
             output["request_insert_id"] = str(response.inserted_id)
@@ -49,6 +53,7 @@ async def create_canteen(canteen: Canteen, canteenRequest: CanteenRegistration):
         return output
     except Exception as e:
         return {"success": False, "error": str(e)}
+
 
 @router.put("/updateCanteen")
 async def update_canteen(Id: int, changes: dict):
@@ -64,24 +69,24 @@ async def update_canteen(Id: int, changes: dict):
         return output
     except Exception as e:
         return {"success": False, "error": str(e)}
-    
+
 
 @router.put("/approveOrRejectCanteen")
-async def update_canteen(Id: int, changes: dict):
+async def update_canteen(request: dict, canteen: dict):
     try:
-        filter = {"Id": Id}
-        canteen_changes = changes['CanteenChanges']
-        canteen_changes["LastUpdated"] = datetime.now().isoformat()
-        new_values = {"$set": canteen_changes}
+        filter = {"Id": canteen.get('Id')}
+        canteen["LastUpdated"] = datetime.now().isoformat()
+        canteen.pop('_id', '')
+        new_values = {"$set": canteen}
         response = CANTEEN_COLL.update_one(filter, new_values)
         output = {"success": False}
         if (response.modified_count):
             output["canteen_success"] = True
             output["canteen_modified_count"] = str(response.modified_count)
-        filter = {"CanteenId": Id}
-        request_changes = changes['RequestChanges']
-        request_changes["LastUpdated"] = datetime.now().isoformat()
-        new_values = {"$set": request_changes}
+        filter = {"Id": request.get('Id')}
+        request["LastUpdated"] = datetime.now().isoformat()
+        request.pop('_id', '')
+        new_values = {"$set": request}
         response = CANTEEN_REG_COLL.update_one(filter, new_values)
         if (response.modified_count):
             output["request_success"] = True
@@ -91,6 +96,7 @@ async def update_canteen(Id: int, changes: dict):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+
 @router.delete("/deleteCanteen")
 async def delete_canteen(Id: int):
     try:
@@ -98,6 +104,7 @@ async def delete_canteen(Id: int):
         return {"success": True, "deleted_count": response.deleted_count}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
 
 @router.get("/getCanteen")
 async def get_canteen(Id: int):
@@ -107,7 +114,8 @@ async def get_canteen(Id: int):
         return response
     except Exception as e:
         return {"error": str(e)}
-    
+
+
 @router.get("/getAllCanteens")
 async def get_all_canteens():
     data = []
@@ -118,10 +126,10 @@ async def get_all_canteens():
         return data
     except Exception as e:
         return {"error": str(e)}
-    
+
 
 @router.get("/getAllCanteensForUser")
-async def get_all_canteens_for_user(Id : int):
+async def get_all_canteens_for_user(Id: int):
     data = []
     try:
         for canteen in CANTEEN_COLL.find({"OwnerId": Id, 'Status': 'Approved'}):
@@ -154,13 +162,13 @@ async def get_rejected_canteens_for_owner(Id: int):
         return data
     except Exception as e:
         return {"error": str(e)}
-    
 
-@router.get("/getAllCanteensRequests")
-async def get_all_canteens_for_user(Id: int):
+
+@router.get("/getActiveCanteensRequests")
+async def get_active_canteen_requests():
     data = []
     try:
-        for canteen in CANTEEN_REG_COLL.find({}):
+        for canteen in CANTEEN_REG_COLL.find({'Status': 'Requested'}):
             canteen['_id'] = str(canteen['_id'])
             data.append(canteen)
         return data
@@ -168,11 +176,11 @@ async def get_all_canteens_for_user(Id: int):
         return {"error": str(e)}
 
 
-@router.get("/getAllCanteensRequests")
-async def get_all_canteens_for_user(Id: int):
+@router.get("/getApprovedCanteensRequests")
+async def get_approved_canteen_requests():
     data = []
     try:
-        for canteen in CANTEEN_COLL.find({'Status': 'Requested'}):
+        for canteen in CANTEEN_REG_COLL.find({'Status': 'Approved'}):
             canteen['_id'] = str(canteen['_id'])
             data.append(canteen)
         return data
@@ -180,3 +188,13 @@ async def get_all_canteens_for_user(Id: int):
         return {"error": str(e)}
 
 
+@router.get("/getRejectedCanteensRequests")
+async def get_rejected_canteen_requests():
+    data = []
+    try:
+        for canteen in CANTEEN_REG_COLL.find({'Status': 'Rejected'}):
+            canteen['_id'] = str(canteen['_id'])
+            data.append(canteen)
+        return data
+    except Exception as e:
+        return {"error": str(e)}

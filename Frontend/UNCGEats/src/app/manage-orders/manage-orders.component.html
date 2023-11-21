@@ -26,133 +26,128 @@
         {{ canteen.Name }}
       </option>
     </select>
-
-    <div
-      *ngIf="selectedCanteen == -1"
-      class="mt-4"
-      style="display: flex; justify-content: center"
-    >
-      Please select a Canteen to view data
-    </div>
-    <mat-tab-group
-      animationDuration="0ms"
-      class="mt-5"
-      style="padding: 20px"
-      *ngIf="selectedCanteen > 0"
-    >
-      <mat-tab label="Active Orders">
-        <mat-accordion>
-          <mat-expansion-panel
-            *ngFor="let order of activeCanteenOrders.slice().reverse()"
-            class="mt-4"
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title> {{ order.formattedDate }} </mat-panel-title>
-              <mat-panel-title> Order Id: {{ order.Id }} </mat-panel-title>
-              <mat-panel-title>
-                Quantity: {{ order.TotalItems }}
-              </mat-panel-title>
-              <mat-panel-title>
-                Total: $ {{ order.TotalPrice.toFixed(2) }}
-              </mat-panel-title>
-              <mat-panel-title>
-                Status: {{ order.OrderStatus }}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <table class="mx-3" style="border: none">
-              <thead>
-                <tr>
-                  <th style="padding-left: 15px">Item</th>
-                  <th style="padding-left: 15px">Quantity</th>
-                  <th style="padding-left: 15px">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of order.orderedItemsDetails">
-                  <td style="padding-left: 15px">
-                    <img
-                      src="{{ item.Item.Image }}"
-                      style="width: 50px; height: 50px; object-fit: fill"
-                    />
-                    {{ item.Item.Name }}
-                  </td>
-                  <td style="padding-left: 15px">{{ item.Quantity }}</td>
-                  <td style="padding-left: 15px">
-                    $ {{ (item.Item.Price! * item.Quantity!).toFixed(2) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <mat-chip-listbox aria-label="Order Status">
-              <mat-chip-option
-                *ngFor="let status of orderStatusList"
-                (selectionChange)="updateOrderStatus(order, status)"
-                >{{ status }}</mat-chip-option
-              >
-            </mat-chip-listbox>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <div
-          *ngIf="activeCanteenOrders.length == 0"
-          class="mt-4"
-          style="display: flex; justify-content: center"
-        >
-          No Data To Display
-        </div>
-      </mat-tab>
-      <mat-tab label="Completed Orders">
-        <mat-accordion>
-          <mat-expansion-panel
-            *ngFor="let order of closedCanteenOrders.slice().reverse()"
-            class="mt-4"
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title> {{ order.formattedDate }} </mat-panel-title>
-              <mat-panel-title> Order Id: {{ order.Id }} </mat-panel-title>
-              <mat-panel-title>
-                Quantity: {{ order.TotalItems }}
-              </mat-panel-title>
-              <mat-panel-title>
-                Total: $ {{ order.TotalPrice.toFixed(2) }}
-              </mat-panel-title>
-              <mat-panel-title>
-                Status: {{ order.OrderStatus }}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <table class="mx-3" style="border: none">
-              <thead>
-                <tr>
-                  <th style="padding-left: 15px">Item</th>
-                  <th style="padding-left: 15px">Quantity</th>
-                  <th style="padding-left: 15px">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of order.orderedItemsDetails">
-                  <td style="padding-left: 15px">
-                    <img
-                      src="{{ item.Item.Image }}"
-                      style="width: 50px; height: 50px; object-fit: fill"
-                    />
-                    {{ item.Item.Name }}
-                  </td>
-                  <td style="padding-left: 15px">{{ item.Quantity }}</td>
-                  <td style="padding-left: 15px">
-                    $ {{ (item.Item.Price! * item.Quantity!).toFixed(2) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <div
-          *ngIf="closedCanteenOrders.length == 0"
-          class="mt-4"
-          style="display: flex; justify-content: center"
-        >
-          No Data To Display
-        </div>
-      </mat-tab>
-    </mat-tab-group>
   </div>
+  <div
+    *ngIf="selectedCanteen == -1"
+    class="mt-4"
+    style="display: flex; justify-content: center"
+  >
+    Please select a Canteen to view data
+  </div>
+  <mat-tab-group
+    animationDuration="0ms"
+    class="mt-5"
+    style="padding: 20px"
+    *ngIf="selectedCanteen > 0"
+  >
+    <mat-tab label="Active Orders">
+      <mat-accordion>
+        <mat-expansion-panel
+          *ngFor="let order of activeCanteenOrders.slice().reverse()"
+          class="mt-4"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ order.formattedDate }} </mat-panel-title>
+            <mat-panel-title> Order Id: {{ order.Id }} </mat-panel-title>
+            <mat-panel-title>
+              Quantity: {{ order.TotalItems }}
+            </mat-panel-title>
+            <mat-panel-title>
+              Total: $ {{ order.TotalPrice.toFixed(2) }}
+            </mat-panel-title>
+            <mat-panel-title> Status: {{ order.OrderStatus }} </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table class="mx-3" style="border: none">
+            <thead>
+              <tr>
+                <th style="padding-left: 15px">Item</th>
+                <th style="padding-left: 15px">Quantity</th>
+                <th style="padding-left: 15px">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.orderedItemsDetails">
+                <td style="padding-left: 15px">
+                  <img
+                    src="{{ item.Item.Image }}"
+                    style="width: 50px; height: 50px; object-fit: fill"
+                  />
+                  {{ item.Item.Name }}
+                </td>
+                <td style="padding-left: 15px">{{ item.Quantity }}</td>
+                <td style="padding-left: 15px">
+                  $ {{ (item.Item.Price! * item.Quantity!).toFixed(2) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-chip-listbox aria-label="Order Status">
+            <mat-chip-option
+              *ngFor="let status of orderStatusList"
+              (selectionChange)="updateOrderStatus(order, status)"
+              >{{ status }}</mat-chip-option
+            >
+          </mat-chip-listbox>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div
+        *ngIf="activeCanteenOrders.length == 0"
+        class="mt-4"
+        style="display: flex; justify-content: center"
+      >
+        No Data To Display
+      </div>
+    </mat-tab>
+    <mat-tab label="Completed Orders">
+      <mat-accordion>
+        <mat-expansion-panel
+          *ngFor="let order of closedCanteenOrders.slice().reverse()"
+          class="mt-4"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ order.formattedDate }} </mat-panel-title>
+            <mat-panel-title> Order Id: {{ order.Id }} </mat-panel-title>
+            <mat-panel-title>
+              Quantity: {{ order.TotalItems }}
+            </mat-panel-title>
+            <mat-panel-title>
+              Total: $ {{ order.TotalPrice.toFixed(2) }}
+            </mat-panel-title>
+            <mat-panel-title> Status: {{ order.OrderStatus }} </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table class="mx-3" style="border: none">
+            <thead>
+              <tr>
+                <th style="padding-left: 15px">Item</th>
+                <th style="padding-left: 15px">Quantity</th>
+                <th style="padding-left: 15px">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.orderedItemsDetails">
+                <td style="padding-left: 15px">
+                  <img
+                    src="{{ item.Item.Image }}"
+                    style="width: 50px; height: 50px; object-fit: fill"
+                  />
+                  {{ item.Item.Name }}
+                </td>
+                <td style="padding-left: 15px">{{ item.Quantity }}</td>
+                <td style="padding-left: 15px">
+                  $ {{ (item.Item.Price! * item.Quantity!).toFixed(2) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div
+        *ngIf="closedCanteenOrders.length == 0"
+        class="mt-4"
+        style="display: flex; justify-content: center"
+      >
+        No Data To Display
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

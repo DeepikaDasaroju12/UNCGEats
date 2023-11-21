@@ -1,3 +1,5 @@
+import { User } from "./user.model"
+
 export interface Canteen{
     Name : string
     Id?: number
@@ -32,5 +34,7 @@ export interface CanteenRegistration {
   Status: CanteenStatus;
   Comments?: string;
   LastUpdated?: Date;
+  Canteen?: Canteen;
+  Owner?: User;
 }
 

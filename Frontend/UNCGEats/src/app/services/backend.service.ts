@@ -309,4 +309,87 @@ export class BackendService {
       }
     );
   }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(
+      new URL('user/getAllUsers', 'http://localhost:8000').toString()
+    );
+  }
+
+  getAllOwners(): Observable<User[]> {
+    return this.http.get<User[]>(
+      new URL('user/getAllOwners', 'http://localhost:8000').toString()
+    );
+  }
+
+  getAllAdmins(): Observable<User[]> {
+    return this.http.get<User[]>(
+      new URL('user/getAllAdmins', 'http://localhost:8000').toString()
+    );
+  }
+
+  getActiveCanteenRequests(): Observable<CanteenRegistration[]> {
+    return this.http.get<CanteenRegistration[]>(
+      new URL(
+        'canteen/getActiveCanteensRequests',
+        'http://localhost:8000'
+      ).toString()
+    );
+  }
+
+  getApprovedCanteenRequests(): Observable<CanteenRegistration[]> {
+    return this.http.get<CanteenRegistration[]>(
+      new URL(
+        'canteen/getApprovedCanteensRequests',
+        'http://localhost:8000'
+      ).toString()
+    );
+  }
+
+  getRejectedCanteenRequests(): Observable<CanteenRegistration[]> {
+    return this.http.get<CanteenRegistration[]>(
+      new URL(
+        'canteen/getRejectedCanteensRequests',
+        'http://localhost:8000'
+      ).toString()
+    );
+  }
+
+  getCanteen(id: number): Observable<Canteen> {
+    return this.http.get<Canteen>(
+      new URL('canteen/getCanteen', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: id,
+        },
+      }
+    );
+  }
+
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(
+      new URL('user/getUser', 'http://localhost:8000').toString(),
+      {
+        params: {
+          Id: id,
+        },
+      }
+    );
+  }
+
+  approveOrRejectCanteenRequest(
+    request: CanteenRegistration,
+    canteen: Canteen
+  ): Observable<any> {
+    return this.http.put<any>(
+      new URL(
+        'canteen/approveOrRejectCanteen',
+        'http://localhost:8000'
+      ).toString(),
+      {
+        request: request,
+        canteen: canteen,
+      }
+    );
+  }
 }

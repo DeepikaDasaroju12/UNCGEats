@@ -3,9 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { CanteenComponent } from './canteen/canteen.component';
 import { FoodItemsListComponent } from './food-items-list/food-items-list.component';
-import { OrdersComponent } from './orders/orders.component';
 import { UserLandingPageComponent } from './user-landing-page/user-landing-page.component';
 import { CanteenCardListViewComponent } from './canteen-card-list-view/canteen-card-list-view.component';
 import { AddEditCanteenMenuComponent } from './add-edit-canteen-menu/add-edit-canteen-menu.component';
@@ -14,14 +12,12 @@ import { ManageCanteenComponent } from './manage-canteen/manage-canteen.componen
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ViewOwnersComponent } from './view-owners/view-owners.component';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
-
+import { ManageCanteenRequestsComponent } from './manage-canteen-requests/manage-canteen-requests.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'canteen', component: CanteenComponent },
-  { path: 'food-items-list/:canteenName', component: FoodItemsListComponent },
   {
     path: 'userlanding',
     component: UserLandingPageComponent,
@@ -34,6 +30,10 @@ const routes: Routes = [
       { path: 'manageOrders', component: ManageOrdersComponent },
       { path: 'viewAllOwners', component: ViewOwnersComponent },
       { path: 'viewAllCustomers', component: ViewCustomersComponent },
+      {
+        path: 'manageCanteenRequests',
+        component: ManageCanteenRequestsComponent,
+      },
     ],
   },
 ];

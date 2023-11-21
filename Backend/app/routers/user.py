@@ -90,6 +90,41 @@ async def get_user(Id: int):
         return {"error": str(e)}
 
 
+@router.get("/getAllUsers")
+async def get_all_users():
+    data = []
+    try:
+        for response in COLL.find({"UserType": 'customer'}):
+            response['_id'] = str(response['_id'])
+            data.append(response)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+    
+
+@router.get("/getAllOwners")
+async def get_all_owners():
+    data = []
+    try:
+        for response in COLL.find({"UserType": 'owner'}):
+            response['_id'] = str(response['_id'])
+            data.append(response)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+    
+
+@router.get("/getAllAdmins")
+async def get_all_admins():
+    data = []
+    try:
+        for response in COLL.find({"UserType": 'admin'}):
+            response['_id'] = str(response['_id'])
+            data.append(response)
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+
 @router.get("/isEmailExists/")
 async def isEmailExists(Email: str):
     # Check if the email exists in the list of users
