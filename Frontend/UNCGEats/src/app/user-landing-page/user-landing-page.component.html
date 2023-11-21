@@ -10,12 +10,14 @@
             }}
             Landing Page
           </h2>
-          <img
-            src="https://img.favpng.com/15/8/8/user-profile-2018-in-sight-user-conference-expo-business-default-png-favpng-5EdhQJprgN1HKZdx50LCN4zXg.jpg"
-            alt="avatar"
-            class="rounded-circle img-fluid"
-            style="width: 150px"
-          />
+          <a href="/userlanding/editProfile">
+            <img
+              src="{{ loggedUser.ProfilePic }}"
+              onerror="this.onerror=null;this.src='../../assets/missing_img.jpg'"
+              class="rounded-circle img-fluid"
+              style="width: 150px"
+            />
+          </a>
           <h5 class="my-3">
             {{ loggedUser.FirstName + " " + loggedUser.LastName }}
           </h5>
@@ -26,7 +28,9 @@
             Last Logged: {{ loggedUser.LastLogged }}
           </p>
           <div class="d-flex justify-content-center mb-2">
-            <button type="button" class="btn btn-primary" (click)="logOut()">Log Out</button>
+            <button type="button" class="btn btn-primary" (click)="logOut()">
+              Log Out
+            </button>
             <!-- <button type="button" class="btn btn-danger ms-1" (click)="deleteUser()">
               Delete Account
             </button> -->

@@ -45,6 +45,7 @@ async def update_user(Id: int, changes: dict):
         filter = {"Id": Id}
         changes["LastUpdated"] = datetime.now().isoformat()
         new_values = {"$set": changes}
+        changes.pop('_id', '')
         response = COLL.update_one(filter, new_values)
         output = {"success": False}
         if (response.modified_count):
@@ -100,7 +101,7 @@ async def get_all_users():
         return data
     except Exception as e:
         return {"error": str(e)}
-    
+
 
 @router.get("/getAllOwners")
 async def get_all_owners():
@@ -112,7 +113,7 @@ async def get_all_owners():
         return data
     except Exception as e:
         return {"error": str(e)}
-    
+
 
 @router.get("/getAllAdmins")
 async def get_all_admins():
@@ -124,6 +125,7 @@ async def get_all_admins():
         return data
     except Exception as e:
         return {"error": str(e)}
+
 
 @router.get("/isEmailExists/")
 async def isEmailExists(Email: str):

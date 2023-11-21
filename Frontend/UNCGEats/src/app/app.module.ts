@@ -24,6 +24,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { ManageCanteenRequestsComponent } from './manage-canteen-requests/manage-canteen-requests.component';
+import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
 
 // import { RequestsComponent } from './requests/requests.component';
 
@@ -43,6 +44,7 @@ import { ManageCanteenRequestsComponent } from './manage-canteen-requests/manage
     ViewCustomersComponent,
     ManageOrdersComponent,
     ManageCanteenRequestsComponent,
+    UserProfileEditComponent,
   ],
   imports: [
     MdbCarouselModule,

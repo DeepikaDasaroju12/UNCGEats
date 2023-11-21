@@ -1,0 +1,103 @@
+<div class="card mt-4">
+  <h2 class="mx-2 mt-2" style="display: flex; justify-content: center">
+    Edit User Profile
+  </h2>
+  <form
+    [formGroup]="this.userForm"
+    style="padding: 25px"
+    (submit)="updateUser()"
+  >
+    <img
+      src="{{ currentImageStr }}"
+      onerror="this.onerror=null;this.src='../../assets/missing_img.jpg'"
+      class="rounded-circle img-fluid mx-2"
+      style="width: 150px"
+    />
+    <input
+      type="file"
+      name=""
+      id=""
+      (change)="convertFileToBase64($event)"
+      (click)="setSpinner()"
+    />
+    <div class="row mt-4">
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="fname">First Name</label>
+          <input
+            type="text"
+            id="fname"
+            class="form-control form-control-lg"
+            formControlName="FirstName"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="mname">Middle Name</label>
+          <input
+            type="text"
+            id="mname"
+            class="form-control form-control-lg"
+            formControlName="MiddleName"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="lname">Last Name</label>
+          <input
+            type="text"
+            id="lname"
+            class="form-control form-control-lg"
+            formControlName="LastName"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control form-control-lg"
+            formControlName="Email"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="phoneNumber">Phone Number</label>
+        </div>
+        <input
+          type="text"
+          id="phoneNumber"
+          class="form-control form-control-lg"
+          formControlName="PhoneNumber"
+        />
+      </div>
+      <div class="col">
+        <div class="form-outline mb-2">
+          <label class="form-label" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control form-control-lg"
+            formControlName="Password"
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="mt-4 mx-2 btn btn-primary" type="submit">Submit</button>
+
+      <button class="mt-4 mx-2 btn btn-secondary" (click)="cancelEdit()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

@@ -392,4 +392,16 @@ export class BackendService {
       }
     );
   }
+
+  updateUser(user: User): Observable<any> {
+    return this.http.put<any>(
+      new URL('user/updateUser', 'http://localhost:8000').toString(),
+      user,
+      {
+        params: {
+          Id: user.Id!,
+        },
+      }
+    );
+  }
 }

@@ -23,3 +23,4 @@ class User(BaseModel):
     Password: str
     UserType: UserTypeEnum
     Deleted: Optional[bool] = False
+    ProfilePic: Optional[str] = ''

@@ -13,6 +13,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ViewOwnersComponent } from './view-owners/view-owners.component';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
 import { ManageCanteenRequestsComponent } from './manage-canteen-requests/manage-canteen-requests.component';
+import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'manageCanteenRequests',
         component: ManageCanteenRequestsComponent,
+      },
+      {
+        path: 'editProfile',
+        component: UserProfileEditComponent,
       },
     ],
   },
