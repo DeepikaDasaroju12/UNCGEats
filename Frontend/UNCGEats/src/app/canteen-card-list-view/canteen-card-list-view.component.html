@@ -35,4 +35,9 @@
       </div>
     </div>
   </div>
+  <div *ngIf="canteenList.length==0">
+    <div class="card" style="height: 50vh; width: 50vw; display: flex; justify-content: center;">
+      <h1 style="display: flex; justify-content: center;">No Canteens to Display</h1>
+    </div>
+  </div>
 </div>
