@@ -1,3 +1,4 @@
 fastapi==0.103.1
 pymongo==4.5.0
 uvicorn[standard]
+pydantic[email]
